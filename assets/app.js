@@ -161,6 +161,26 @@
   function safeUrl(url) {
     return typeof url === 'string' && /^https?:\/\//i.test(url) ? url : null;
   }
+  // A listing's own page, or null. Search pages, profiles and other sites never become Open links.
+  const LISTING_PAGES = {
+    carousell: { host: 'carousell.ph', path: /^\/p\/(?:[^/]*-)?\d{5,}\/?$/ },
+    fb_marketplace: { host: 'facebook.com', path: /^\/marketplace\/item\/\d+\/?$/ },
+    fb_group: { host: 'facebook.com', path: /^\/groups\/[^/]+\/(?:posts|permalink)\/\d+\/?$/ },
+  };
+  function listingUrl(platform, url) {
+    const rule = LISTING_PAGES[platform];
+    if (!rule || typeof url !== 'string') return null;
+    try {
+      const u = new URL(url);
+      const onHost = u.hostname === rule.host || u.hostname.endsWith(`.${rule.host}`);
+      return u.protocol === 'https:' && onHost && rule.path.test(u.pathname) ? u.href : null;
+    } catch {
+      return null;
+    }
+  }
+  function linkAttrs(url) {
+    return `href="${esc(url)}" target="_blank" rel="noopener noreferrer" data-listing-link`;
+  }
   function domId(id) {
     return String(id).replace(/[^a-zA-Z0-9_-]/g, '_');
   }
@@ -430,7 +450,7 @@
   }
 
   function listingCard(l) {
-    const url = safeUrl(l.url);
+    const url = listingUrl(l.platform, l.url);
     const where = PLATFORMS[l.platform]?.long || 'the site';
     const isOpen = state.open.has(l.id);
     const moreId = `more-${domId(l.id)}`;
@@ -445,7 +465,7 @@
           <span class="meta">${l.location ? `<span>${esc(l.location)}</span>` : ''}${who ? `<span>${esc(who)}</span>` : ''}<span>${agoTag(l.firstSeen, 'found ')}</span></span>
         </span>
       </button>
-      ${url ? `<a class="quick-open" href="${esc(url)}" target="_blank" rel="noopener noreferrer" aria-label="Open listing on ${esc(where)}">${icon('external')}</a>` : ''}
+      ${url ? `<a class="quick-open" ${linkAttrs(url)} aria-label="Open listing on ${esc(where)}">${icon('external')}</a>` : ''}
       <div class="more" id="${moreId}">
         ${l.description ? `<p class="desc">${esc(l.description)}</p>` : ''}
         <dl class="facts">
@@ -456,7 +476,7 @@
           ${fact('First found', l.firstSeen ? `${esc(dateTimeFmt.format(new Date(l.firstSeen)))} PHT` : '')}
           ${fact('Last checked', l.lastSeen ? agoTag(l.lastSeen) : '')}
         </dl>
-        ${url ? `<a class="btn btn-primary open-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer">Open on ${esc(where)} ${icon('external')}</a>` : ''}
+        ${url ? `<a class="btn btn-primary open-link" ${linkAttrs(url)}>Open on ${esc(where)} ${icon('external')}</a>` : '<p class="link-missing">Link unavailable for this listing</p>'}
       </div>
     </article>`;
   }
@@ -464,14 +484,14 @@
   function listingTable(list) {
     const rows = list
       .map((l) => {
-        const url = safeUrl(l.url);
+        const url = listingUrl(l.platform, l.url);
         const sub = [l.location, l.platform === 'fb_group' ? l.source : l.seller].filter(Boolean).join(' · ');
         return `<tr class="${l.status === 'removed' ? 'is-removed' : ''}">
           <td><div class="t-item">${thumb(l)}<div><div class="t-title">${esc(l.title)}</div><div class="t-sub">${esc(sub)}</div></div></div></td>
           <td>${platformTag(l.platform)}</td>
           <td class="num"><div class="t-price">${priceLine(l)}${statusPill(l)}</div></td>
           <td class="t-muted t-nowrap">${agoTag(l.firstSeen)}</td>
-          <td>${url ? `<a class="btn btn-ghost btn-sm" href="${esc(url)}" target="_blank" rel="noopener noreferrer" aria-label="Open listing on ${esc(PLATFORMS[l.platform]?.long || 'the site')}">Open ${icon('external')}</a>` : ''}</td>
+          <td>${url ? `<a class="btn btn-ghost btn-sm table-open" ${linkAttrs(url)} aria-label="Open listing on ${esc(PLATFORMS[l.platform]?.long || 'the site')}">Open ${icon('external')}</a>` : '<span class="t-muted">No link</span>'}</td>
         </tr>`;
       })
       .join('');
@@ -622,11 +642,11 @@
     return events
       .map((e) => {
         const l = byId.get(e.listingId);
-        const url = safeUrl(e.url);
+        const url = listingUrl(e.platform, e.url);
         const title = l
           ? `<button type="button" class="tl-title" data-goto="${esc(l.id)}">${esc(l.title)}</button>`
           : url
-            ? `<a class="tl-title" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(e.title || 'Listing')}</a>`
+            ? `<a class="tl-title" ${linkAttrs(url)}>${esc(e.title || 'Listing')}</a>`
             : `<span class="tl-title">${esc(e.title || 'Listing no longer tracked')}</span>`;
         const platform = l?.platform || e.platform;
         const day = dayLabel(e.at);
@@ -818,11 +838,11 @@
     const rows = latest
       .map((e) => {
         const l = byId.get(e.listingId) || { title: e.title, url: e.url, platform: e.platform };
-        const url = safeUrl(l.url);
+        const url = listingUrl(l.platform, l.url);
         const price = e.type === 'price_drop' || e.type === 'price_up' ? `${fmtPrice(e.from)} → ${fmtPrice(e.to)}` : fmtPrice(e.to ?? e.from ?? l.price);
         return `<div class="email-row">
           <span class="what">${esc(EVENT_LABELS[e.type])} · ${esc(PLATFORMS[l.platform]?.long || '')}</span>
-          <span>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(l.title)}</a>` : esc(l.title)}</span>
+          <span>${url ? `<a ${linkAttrs(url)}>${esc(l.title)}</a>` : esc(l.title)}</span>
           <span class="price">${esc(price)}</span>
         </div>`;
       })
@@ -945,6 +965,10 @@
   function bind() {
     document.addEventListener('click', (e) => {
       const t = e.target;
+      if (state.data?.sample && t.closest('[data-listing-link]')) {
+        e.preventDefault();
+        return showToast('Sample listing. Real listings open their Carousell page directly.');
+      }
       const tabBtn = t.closest('[data-tab]');
       if (tabBtn) return setTab(tabBtn.dataset.tab);
 

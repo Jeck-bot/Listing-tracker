@@ -52,7 +52,7 @@ JSON are moved to `scanner/rejected/`.
 | `message` | no | Short note, shown on the dashboard's Settings tab. |
 | `searches` | no | Each search term and how many results were read. |
 | `listings[]` | yes | Everything seen in the results, unfiltered. The script decides what matches. |
-| `listings[].url` | yes | The listing link, `https://www.carousell.ph/p/...`. Other links are rejected. |
+| `listings[].url` | yes | The listing's own page, `https://www.carousell.ph/p/<title>-<number>/`. A relative `/p/...` link is fine. Search pages, profiles and other sites are rejected, so the dashboard and emails always open the listing itself. Tracking parameters are removed. |
 | `listings[].title` | yes | Exactly as shown. |
 | `listings[].price` | yes | Pesos as a number (`38000`). Strings like `"PHP 38,000"` are also accepted. |
 | `listings[].condition`, `seller`, `location` | no | As shown on the card. |

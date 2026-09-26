@@ -58,7 +58,7 @@ You keep my Bag Tracker dashboard up to date. The project is the public GitHub r
 
 2. Search Carousell with the browser, one term at a time.
    - Open https://www.carousell.ph/search/<term with spaces as %20> and make sure the results are sorted by Recent (newest first); use the page's sort control if needed.
-   - Read the first <resultsPerSearch> listing cards. For each one record: the listing link (https://www.carousell.ph/p/...), the title exactly as shown, the price in pesos as a plain number, condition, seller username, the photo link if you can see it, and the posted time text (for example "3 hours ago"). Also record which search term found it.
+   - Read the first <resultsPerSearch> listing cards. For each one record: the card's own listing link, which looks like https://www.carousell.ph/p/<title>-<number>/ (never the search page address; if the page only shows "/p/...", write that), the title exactly as shown, the price in pesos as a plain number, condition, seller username, the photo link if you can see it, and the posted time text (for example "3 hours ago"). Also record which search term found it.
    - Record every listing you see. Don't filter or judge them; the project's script decides what matches.
    - Wait a few seconds between searches.
    - If Carousell shows a bot check ("Just a moment", "Verify you are human"), a CAPTCHA or a login wall, don't try to get past it. Stop searching and go to step 4 with status "blocked" and a short message saying what you saw.
