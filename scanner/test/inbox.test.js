@@ -10,11 +10,38 @@ test('identify gives stable ids and strips tracking from Carousell links', () =>
     url: 'https://www.carousell.ph/p/chloe-paddington-bag-1234567890/',
   });
   assert.equal(identify('carousell', 'https://carousell.ph/p/1234567890').id, 'carousell-1234567890');
-  assert.equal(identify('carousell', 'http://www.carousell.ph/p/x-1234567890/'), null, 'http is rejected');
+  assert.equal(identify('carousell', 'http://www.carousell.ph/p/x-1234567890/').url, 'https://www.carousell.ph/p/x-1234567890/', 'http becomes https');
   assert.equal(identify('carousell', 'https://evil.example/p/x-1234567890/'), null, 'other hosts are rejected');
   assert.equal(identify('carousell', 'https://www.carousell.ph/search/chloe'), null, 'search pages are not listings');
   assert.equal(identify('carousell', 'javascript:alert(1)'), null);
   assert.equal(identify('fb_marketplace', 'https://www.facebook.com/marketplace/item/987654321/?ref=x').id, 'fb_marketplace-987654321');
+});
+
+test('identify accepts listing links however they were copied', () => {
+  const want = { id: 'carousell-1300000001', url: 'https://www.carousell.ph/p/chloe-paddington-bag-1300000001/' };
+  assert.deepEqual(identify('carousell', '/p/chloe-paddington-bag-1300000001/?t-id=x_1&t-referrer_request_id=y'), want, 'relative');
+  assert.deepEqual(identify('carousell', 'www.carousell.ph/p/chloe-paddington-bag-1300000001'), want, 'no scheme');
+  assert.deepEqual(identify('carousell', '//www.carousell.ph/p/chloe-paddington-bag-1300000001/'), want, 'protocol-relative');
+  assert.deepEqual(identify('carousell', 'https://m.carousell.ph/p/chloe-paddington-bag-1300000001/#photos'), { ...want, url: 'https://www.carousell.ph/p/chloe-paddington-bag-1300000001/' }, 'mobile host');
+  assert.deepEqual(identify('carousell', '  https://www.carousell.ph/p/1300000001  '), { id: 'carousell-1300000001', url: 'https://www.carousell.ph/p/1300000001/' }, 'id only');
+});
+
+test('identify never returns a search, profile or other page', () => {
+  for (const url of [
+    'https://www.carousell.ph/search/chloe%20paddington',
+    '/search/balenciaga%20city?sort_by=3',
+    'https://www.carousell.ph/u/closetbyjen/',
+    'https://www.carousell.ph/categories/luxury-bags-20/',
+    'https://www.carousell.ph/p/',
+    'https://www.carousell.ph/p/chloe-paddington-bag/',
+    'https://www.carousell.sg/p/chloe-paddington-bag-1300000001/',
+    'https://www.carousell.ph.evil.example/p/x-1300000001/',
+    'ftp://www.carousell.ph/p/x-1300000001/',
+    '',
+    null,
+  ]) {
+    assert.equal(identify('carousell', url), null, String(url));
+  }
 });
 
 test('parsePrice reads numbers and peso strings', () => {

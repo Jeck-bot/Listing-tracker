@@ -389,6 +389,7 @@ img { max-width: 100%; }
 .facts dt { color: var(--muted); }
 .facts dd { margin: 0; overflow-wrap: anywhere; }
 .open-link { width: 100%; }
+.link-missing { font-size: 13px; color: var(--muted); }
 
 .listing.is-removed .thumb, .listing.is-removed .title { opacity: .55; }
 .listing.is-removed .price { text-decoration: line-through; color: var(--muted); }

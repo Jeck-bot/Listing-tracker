@@ -25,13 +25,37 @@ function parseUrl(raw) {
   }
 }
 
+const PLATFORM_BASE = {
+  carousell: 'https://www.carousell.ph',
+  fb_marketplace: 'https://www.facebook.com',
+  fb_group: 'https://www.facebook.com',
+};
+
+// Listing links as Claude may copy them: full, relative ("/p/..."), protocol-relative or without "https://".
+function parseListingUrl(platform, raw) {
+  let s = String(raw ?? '').trim();
+  if (!s) return null;
+  if (s.startsWith('//')) s = `https:${s}`;
+  else if (s.startsWith('/')) s = PLATFORM_BASE[platform] + s;
+  else if (/^(www\.|m\.)?(carousell\.ph|facebook\.com)\//i.test(s)) s = `https://${s}`;
+  try {
+    const u = new URL(s);
+    return u.protocol === 'https:' || u.protocol === 'http:' ? u : null;
+  } catch {
+    return null;
+  }
+}
+
 function onHost(u, platform) {
   return (PLATFORM_HOSTS[platform] || []).some((h) => u.hostname === h || u.hostname.endsWith(`.${h}`));
 }
 
-/** Stable id + clean link (no tracking parameters) for a listing URL, or null if it isn't one. */
+/**
+ * Stable id + the listing's own page (clean, https, no tracking parameters),
+ * or null when the link isn't a single listing (search pages, profiles, other sites).
+ */
 export function identify(platform, rawUrl) {
-  const u = parseUrl(rawUrl);
+  const u = parseListingUrl(platform, rawUrl);
   if (!u || !onHost(u, platform)) return null;
   let m;
   if (platform === 'carousell' && (m = u.pathname.match(/^\/p\/((?:[^/]*?-)?(\d{5,}))\/?$/))) {
