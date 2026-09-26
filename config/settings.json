@@ -1,0 +1,20 @@
+{
+  "scanIntervalHours": 4,
+  "timezone": "Asia/Manila",
+  "notifyOn": {
+    "newListing": true,
+    "priceDrop": true,
+    "priceIncrease": false,
+    "removed": false
+  },
+  "github": {
+    "owner": "Jeck-bot",
+    "repo": "Listing-tracker",
+    "branch": "main"
+  },
+  "platforms": {
+    "carousell": { "enabled": true, "via": "cowork", "resultsPerSearch": 10 },
+    "fb_marketplace": { "enabled": false, "via": "cowork", "location": "manila" },
+    "fb_group": { "enabled": false, "via": "cowork", "groups": [] }
+  }
+}

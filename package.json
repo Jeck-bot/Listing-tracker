@@ -1,0 +1,16 @@
+{
+  "name": "listing-tracker",
+  "private": true,
+  "type": "module",
+  "description": "Tracks Carousell PH listings for a bag watchlist and publishes them to a dashboard.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "process": "node scanner/run.js",
+    "test": "node --test \"scanner/test/*.test.js\""
+  },
+  "dependencies": {
+    "nodemailer": "^10.0.10"
+  }
+}
