@@ -1,104 +1,102 @@
 # Listing-tracker
 
-A dashboard that tracks luxury and vintage bag listings in the **Philippines** on
-**Facebook Marketplace**, **Facebook groups** and **Carousell**. Every listing links
-straight to the original post and shows its price, description and platform. Scans
-run every 1 to 4 hours, and new or changed listings will trigger a Gmail alert.
+A dashboard that tracks **Balenciaga City**, **Chloe Paddington bags** and
+**Chloe Paddington lock and key** listings on **Carousell Philippines**. It shows
+new listings, price drops and increases, and sold items, with a link straight to
+each listing, and can email you when something changes.
 
-> **Status:** the dashboard layout is done and runs on **sample data**. The scanner
-> (the part that actually finds listings) and the Gmail alerts are the next steps.
+**Dashboard:** https://jeck-bot.github.io/Listing-tracker/ (after GitHub Pages is
+turned on; see *Setup*).
 
 | Phone | Desktop |
 | --- | --- |
 | <img src="docs/screenshots/phone.png" width="260" alt="Dashboard on a phone"> | <img src="docs/screenshots/desktop.png" width="560" alt="Dashboard on a desktop"> |
 
-## What the dashboard shows
+## How it works
 
-- **Scan status** at the top: when the last scan ran and when the next one is due (Philippine time).
-- **Summary tiles**: new listings, price drops, listings being tracked, and sold or removed items. Tap a tile to filter by it.
-- **Listings**, each with a platform label (Marketplace, FB Group, Carousell), a status tag (New, a price drop %, a price increase %, Sold or removed), the price with the old price crossed out if it changed, location, seller or group, and an **Open** link to the original listing.
-- **Filters**: platform, status, price range, watchlist item, sort order and a search box.
-- **Changes**: a timeline of everything each scan found or noticed changing.
-- **Watchlist**: the bags being searched for.
-- **Settings**: scan schedule, per-platform scan health, email alert rules and a preview of the alert email.
+```
+Claude Cowork task (every 4 h, on your computer's Claude app)
+  └─ searches Carousell in the browser for each search term
+  └─ saves what it saw → scanner/inbox/cowork-<time>.json
+        └─ GitHub Actions "Process scan results" (starts automatically)
+             ├─ keeps listings whose titles match config/watchlist.json
+             ├─ works out new / price drop / price up / sold
+             ├─ saves data/listings.json → the dashboard updates
+             └─ emails the changes (once Gmail secrets are set)
+```
 
-On a **phone** the listings are compact rows (tap a row for the full description and the
-Open button), and a tab bar at the bottom switches between Listings, Changes, Watchlist and
-Settings. On a **desktop** the filters sit in a left sidebar, listings show as photo cards
-(or a table), and recent changes stay visible on the right. The page follows the device's
-light or dark mode.
+Carousell shows cloud servers a bot check, so the searching is done by Claude in
+the Claude desktop app's browser, like a normal visitor. That means **checks run
+while your computer is on with the Claude app open**. The dashboard warns you
+when a check is overdue.
+
+**Scan now:** the button on the dashboard shows how to start the Cowork task
+right away (Claude app → Cowork → Scheduled → Bag Tracker scan → **Run now**),
+then watches for the results and refreshes itself.
+
+## What's tracked
+
+Edit `config/watchlist.json` to change any of this.
+
+| Item | Carousell searches | Counts when the title has |
+|---|---|---|
+| Chloe Paddington lock and key | chloe paddington lock, chloe padlock, chloe lock and key | chloe + lock/padlock, and no bag words (unless it says "lock only", "no bag"…) |
+| Chloe Paddington bag | chloe paddington | chloe + paddington |
+| Balenciaga City | balenciaga city, balen city, bal city | balenciaga/balen/bal + city (place names like "Quezon City" don't count) |
+
+Titles with **WTB, LF, ISO, looking for, class A, replica, mirror quality,
+inspired, OEM, 1:1** are skipped (buy requests and fakes). Matching ignores
+accents, so "Chloé" counts as "chloe".
+
+## Setup
+
+1. **GitHub Pages** (once): repo **Settings → Pages → Build and deployment →
+   Deploy from a branch → `main` / `(root)` → Save**. The dashboard appears at
+   the link above within a minute or two.
+2. **Cowork task**: follow [docs/cowork-task.md](docs/cowork-task.md). It has a
+   copy-paste prompt, schedule settings and troubleshooting.
+3. **Email alerts** (when your dedicated Gmail is ready):
+   1. On that Gmail account, turn on 2-Step Verification, then create an
+      **App password** (Google Account → Security → App passwords).
+   2. In this repo: **Settings → Secrets and variables → Actions → New
+      repository secret**, and add:
+      - `GMAIL_USER`: the Gmail address that sends the alerts
+      - `GMAIL_APP_PASSWORD`: the 16-character app password
+      - `NOTIFY_TO`: where alerts go (can be the same address)
+   3. Choose which changes email you in `config/settings.json` → `notifyOn`.
+
+The repo is public, so the email address and password only ever live in GitHub
+Secrets, never in the files.
 
 ## Folder guide
 
 ```
-listing-tracker/
-├── index.html                 dashboard page
-├── assets/
-│   ├── styles.css             look and layout (phone, tablet, desktop, light and dark)
-│   └── app.js                 loads the data and draws everything; re-checks data every 5 min
-├── config/                    ← files you edit
-│   ├── watchlist.json         the bags to track (examples for now)
-│   └── settings.json          scan interval (1–4 h), Gmail address, which changes send an email
-├── data/                      ← files the scanner writes
-│   └── listings.json          listings + change events (sample data for now)
-├── docs/screenshots/          phone and desktop previews used above
-│
-├── scanner/                   (next step) the bot that finds listings
-│   ├── run.js                 load config → scan each platform → compare → save → email
-│   ├── sources/               carousell.js, fb-marketplace.js, fb-groups.js
-│   ├── diff.js                spots new listings, price changes and removed listings
-│   └── notify-gmail.js        sends one summary email per scan
-└── .github/workflows/scan.yml (next step) runs the scanner on a schedule
+index.html, assets/          the dashboard (plain HTML/CSS/JS, no build step)
+config/watchlist.json        items, search terms and matching rules      ← you edit
+config/settings.json         check interval, which changes email you     ← you edit
+data/listings.json           current listings + change history           ← written by the workflow
+scanner/inbox/               where Claude drops each scan's results
+scanner/INBOX.md             the format of those files
+scanner/run.js               processes the inbox (npm run process)
+scanner/lib/                 matching, merging, validation, email
+scanner/test/                unit tests (npm test)
+.github/workflows/scan.yml   runs run.js when a results file arrives
+.github/workflows/ci.yml     runs the tests on every change
+docs/cowork-task.md          Cowork task setup and prompt
 ```
 
-The dashboard only **reads** `config/` and `data/`, so adding the scanner later doesn't
-change the dashboard.
-
-## Data format (`data/listings.json`)
-
-```jsonc
-{
-  "lastScan": "2026-09-26T02:42:00Z",      // ISO time of the last scan
-  "nextScan": "2026-09-26T04:42:00Z",
-  "sources": [{ "platform": "carousell", "ok": true, "found": 4 }],
-  "listings": [{
-    "id": "carousell-1001",
-    "platform": "carousell",                 // fb_marketplace | fb_group | carousell
-    "source": "Carousell",                   // group name for fb_group
-    "title": "Louis Vuitton Speedy 30, Monogram",
-    "price": 38500, "previousPrice": null, "currency": "PHP",
-    "condition": "Lightly used",
-    "description": "…",
-    "location": "Makati City", "seller": "@closetbyjen",
-    "url": "https://…",                      // direct link to the listing
-    "image": null,                           // photo URL, if available
-    "firstSeen": "…", "lastSeen": "…",
-    "status": "new",                         // new | price_drop | price_up | unchanged | removed
-    "matchedQuery": "Louis Vuitton Speedy 30"
-  }],
-  "events": [{ "type": "price_drop", "listingId": "…", "at": "…", "from": 495000, "to": 465000 }]
-}
-```
-
-When `"sample": true` is set, the page shifts the sample times so the last scan always looks recent.
-
-## Preview it yourself
-
-Browsers block data files on pages opened straight from disk, so serve the folder:
+## For developers
 
 ```bash
-python3 -m http.server 8000
-# then open http://localhost:8000
+npm ci
+npm test                  # unit tests
+npm run process           # process scanner/inbox/ locally
+node scanner/run.js --dry-run
+python3 -m http.server    # then open http://localhost:8000
 ```
 
-Or turn on **GitHub Pages** (Settings → Pages → deploy from branch) once this is merged to `main`.
+## Later
 
-## Next steps
-
-1. **Watchlist:** send the bags you want tracked (brand, model, size, colour, price range).
-2. **Scanner:** Carousell PH search pages can be read with a headless browser. Facebook
-   Marketplace and groups need a logged-in account, and Facebook's terms forbid automated
-   scraping, so choose between a paid scraping service (for example Apify) and a script
-   running on your own computer with your login (which risks an account ban).
-3. **Schedule:** a GitHub Actions job every 1–4 hours runs the scanner and saves `data/listings.json`.
-4. **Gmail alerts:** a dedicated Gmail account with an App Password, stored as a GitHub secret.
+Facebook Marketplace and groups can plug into the same inbox format (the Cowork
+task searching them in your logged-in browser). They're switched off in
+`config/settings.json` for now.

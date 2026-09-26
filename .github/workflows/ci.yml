@@ -6,19 +6,16 @@ on:
     branches: ['claude/**']
 
 jobs:
-  carousell-check:
+  test:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
-      - name: Install Playwright for the browser check
-        run: |
-          npm install --no-save --no-package-lock playwright@1.56.1
-          npx playwright install --with-deps chromium
-      - name: Carousell reachability
-        run: |
-          node scanner/diagnose.mjs "chloe paddington" --browser
-          node scanner/diagnose.mjs "balenciaga city"
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Config files are valid JSON
+        run: for f in config/*.json data/*.json; do node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))" || exit 1; done

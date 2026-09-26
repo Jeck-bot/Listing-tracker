@@ -13,14 +13,17 @@
   };
   const RELOAD_EVERY_MS = 5 * 60 * 1000;
   const TICK_MS = 30 * 1000;
+  const WATCH_FOR_MS = 15 * 60 * 1000;
+  const WATCH_EVERY_MS = 30 * 1000;
+  const DAY_MS = 864e5;
   const TZ = 'Asia/Manila';
   const TABS = ['listings', 'changes', 'watchlist', 'settings'];
   const PANEL_EVENT_LIMIT = 12;
 
   const PLATFORMS = {
+    carousell: { short: 'Carousell', long: 'Carousell' },
     fb_marketplace: { short: 'Marketplace', long: 'FB Marketplace' },
     fb_group: { short: 'FB Group', long: 'FB Groups' },
-    carousell: { short: 'Carousell', long: 'Carousell' },
   };
   const STATUSES = {
     new: 'New',
@@ -88,6 +91,9 @@
     open: new Set(),
     sampleOffset: null,
     loading: false,
+    watchUntil: 0,
+    watchTimer: null,
+    watchMark: '',
   };
 
   /* ---------- Formatting ---------- */
@@ -170,10 +176,23 @@
     return `<time datetime="${esc(iso)}" data-ago="${esc(iso)}" data-prefix="${esc(prefix)}" title="${esc(dateTimeFmt.format(new Date(iso)))} PHT">${esc(prefix + ago(iso))}</time>`;
   }
 
+  function platformEnabled(key) {
+    return state.settings.platforms?.[key]?.enabled !== false;
+  }
+  // Platforms shown in chips and filters: switched on, or still holding listings.
+  function activePlatforms() {
+    return Object.entries(PLATFORMS).filter(([key]) => platformEnabled(key) || state.data?.listings.some((l) => l.platform === key));
+  }
+  function repoUrl(path = '') {
+    const gh = state.settings.github || {};
+    const base = gh.owner && gh.repo ? `https://github.com/${gh.owner}/${gh.repo}` : 'https://github.com';
+    return base + path;
+  }
+
   /* ---------- Data ---------- */
 
   async function fetchJSON(path) {
-    const res = await fetch(path, { cache: 'no-store' });
+    const res = await fetch(`${path}?t=${Date.now()}`, { cache: 'no-store' });
     if (!res.ok) throw new Error(`${path} returned ${res.status}`);
     return res.json();
   }
@@ -185,12 +204,32 @@
     data.lastScan = shift(data.lastScan);
     data.nextScan = shift(data.nextScan);
     data.listings.forEach((l) => {
-      l.firstSeen = shift(l.firstSeen);
-      l.lastSeen = shift(l.lastSeen);
+      for (const key of ['firstSeen', 'lastSeen', 'priceChangedAt', 'removedAt']) l[key] = shift(l[key]);
     });
     data.events.forEach((e) => {
       e.at = shift(e.at);
     });
+    data.sources.forEach((src) => {
+      src.lastRun = shift(src.lastRun);
+      src.lastOk = shift(src.lastOk);
+    });
+  }
+
+  // "New" and price-change badges expire even if no scan has run since.
+  function ageStatuses(data) {
+    const now = Date.now();
+    data.listings.forEach((l) => {
+      if (l.status === 'new' && now - time(l.firstSeen) > DAY_MS) l.status = 'unchanged';
+      if ((l.status === 'price_drop' || l.status === 'price_up') && now - time(l.priceChangedAt || l.lastSeen) > 7 * DAY_MS) {
+        l.status = 'unchanged';
+        l.previousPrice = null;
+      }
+    });
+  }
+
+  // Changes whenever a scan result has been processed (even one that found nothing).
+  function dataMark(data) {
+    return [data.lastScan, ...data.sources.map((s) => s.lastRun)].join('|');
   }
 
   async function load() {
@@ -207,12 +246,16 @@
       data.events = Array.isArray(data.events) ? data.events : [];
       data.sources = Array.isArray(data.sources) ? data.sources : [];
       if (data.sample) rebaseSample(data);
+      ageStatuses(data);
+      const mark = dataMark(data);
+      const arrived = state.watchUntil > Date.now() && state.watchMark && mark !== state.watchMark;
       state.data = data;
       state.watchlist = Array.isArray(watchlist.items) ? watchlist.items : [];
       state.settings = settings || {};
       state.loadedAt = Date.now();
       $('#error').hidden = true;
       renderAll();
+      if (arrived) resultsArrived();
     } catch (err) {
       showError(err);
     } finally {
@@ -293,14 +336,18 @@
 
   function renderHeader() {
     const { lastScan, nextScan, sources } = state.data;
-    const failed = sources.filter((s) => s.ok === false);
-    const late = nextScan && Date.now() - time(nextScan) > 30 * 60000;
-    let text = lastScan ? `Scanned ${ago(lastScan)}` : 'Not scanned yet';
-    if (nextScan) text += ` · next scan ${until(nextScan)}`;
-    if (failed.length) text += ` · ${failed.length} source${failed.length > 1 ? 's' : ''} failed`;
+    const blocked = sources.find((s) => s.status === 'blocked' && s.lastRun && (!lastScan || time(s.lastRun) >= time(lastScan)));
+    const overdue = lastScan && nextScan && Date.now() - time(nextScan) > 30 * 60000;
+    const watching = state.watchUntil > Date.now();
+    let text;
+    if (watching) text = 'Waiting for new results…';
+    else if (!lastScan) text = 'Not checked yet';
+    else text = `Checked ${ago(lastScan)}${overdue ? ' · next check overdue' : nextScan ? ` · next ${until(nextScan)}` : ''}`;
+    if (blocked && !watching) text += ` · ${PLATFORMS[blocked.platform]?.long || 'A site'} blocked the last check`;
     $('#scan-text').textContent = text;
-    $('#scan-status').title = lastScan ? `Last scan ${dateTimeFmt.format(new Date(lastScan))} PHT` : '';
-    $('#live-dot').classList.toggle('is-late', Boolean(late || failed.length));
+    $('#scan-status').title = lastScan ? `Last check ${dateTimeFmt.format(new Date(lastScan))} PHT` : '';
+    $('#live-dot').classList.toggle('is-late', Boolean(!watching && (overdue || blocked || !lastScan)));
+    $('#live-dot').classList.toggle('is-watching', watching);
   }
 
   function renderStats() {
@@ -337,7 +384,7 @@
       `<button type="button" class="chip" data-platform="${key}" aria-pressed="${pressed}">${key ? `<span class="plat plat-${key}"><span class="dot" aria-hidden="true"></span></span>` : ''}${esc(label)}<span class="n">${n}</span></button>`;
     $('#chips').innerHTML =
       chip('', 'All', total, state.platforms.size === 0) +
-      Object.entries(PLATFORMS)
+      activePlatforms()
         .map(([key, p]) => chip(key, p.long, counts[key] || 0, state.platforms.size > 0 && state.platforms.has(key)))
         .join('');
   }
@@ -445,7 +492,10 @@
     const useTable = desktop.matches && state.layout === 'table';
     $('#result-count').textContent =
       list.length === total ? `${total} listing${total === 1 ? '' : 's'}` : `Showing ${list.length} of ${total} listings`;
-    $('#empty').hidden = list.length > 0;
+    const noData = total === 0;
+    if (noData) $('#result-count').textContent = 'No listings yet';
+    $('#no-data').hidden = !noData;
+    $('#empty').hidden = noData || list.length > 0;
     $('#list').hidden = useTable || list.length === 0;
     $('#table-wrap').hidden = !useTable || list.length === 0;
     if (useTable) $('#table-wrap').innerHTML = listingTable(list);
@@ -462,7 +512,7 @@
   /* ---------- Filters panel ---------- */
 
   function buildFilters() {
-    const queries = [...new Set([...state.watchlist.map((w) => w.query), ...state.data.listings.map((l) => l.matchedQuery)].filter(Boolean))];
+    const queries = [...new Set([...state.watchlist.map((w) => w.label || w.query), ...state.data.listings.map((l) => l.matchedQuery)].filter(Boolean))];
     if (state.query && !queries.includes(state.query)) state.query = '';
     const check = (name, key, label, extra = '') =>
       `<label class="f-check"><input type="checkbox" name="${name}" value="${key}">${extra}<span>${esc(label)}</span><span class="n" data-count="${name}:${key}"></span></label>`;
@@ -475,7 +525,7 @@
       </div>
       <fieldset class="f-group f-platform">
         <legend class="f-legend">Platform</legend>
-        ${Object.entries(PLATFORMS).map(([k, p]) => check('platform', k, p.long, `<span class="plat plat-${k}"><span class="dot" aria-hidden="true"></span></span>`)).join('')}
+        ${activePlatforms().map(([k, p]) => check('platform', k, p.long, `<span class="plat plat-${k}"><span class="dot" aria-hidden="true"></span></span>`)).join('')}
       </fieldset>
       <fieldset class="f-group">
         <legend class="f-legend">Status</legend>
@@ -566,12 +616,19 @@
   }
 
   function timelineHTML(events) {
-    if (!events.length) return '<li class="tl-empty">No changes yet. New listings and price changes show up here after each scan.</li>';
+    if (!events.length) return '<li class="tl-empty">No changes yet. New listings, price changes and sold items show up here after each check.</li>';
     const byId = new Map(state.data.listings.map((l) => [l.id, l]));
     let lastDay = '';
     return events
       .map((e) => {
         const l = byId.get(e.listingId);
+        const url = safeUrl(e.url);
+        const title = l
+          ? `<button type="button" class="tl-title" data-goto="${esc(l.id)}">${esc(l.title)}</button>`
+          : url
+            ? `<a class="tl-title" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(e.title || 'Listing')}</a>`
+            : `<span class="tl-title">${esc(e.title || 'Listing no longer tracked')}</span>`;
+        const platform = l?.platform || e.platform;
         const day = dayLabel(e.at);
         const heading = day !== lastDay ? `<li class="tl-day">${esc(day)}</li>` : '';
         lastDay = day;
@@ -579,8 +636,8 @@
           <span class="tl-icon">${icon(EVENT_ICONS[e.type] || 'clock')}</span>
           <div class="tl-body">
             <span class="tl-kind"><strong>${esc(EVENT_LABELS[e.type] || e.type)}</strong></span>
-            ${l ? `<button type="button" class="tl-title" data-goto="${esc(l.id)}">${esc(l.title)}</button>` : '<span class="tl-title">Listing no longer in data</span>'}
-            <span class="tl-meta">${l ? platformTag(l.platform) : ''}${eventLine(e, l)}<span>${esc(clock(e.at))}</span></span>
+            ${title}
+            <span class="tl-meta">${platform ? platformTag(platform) : ''}${eventLine(e, l)}<span>${esc(clock(e.at))}</span></span>
           </div>
         </li>`;
       })
@@ -648,24 +705,23 @@
 
   function renderWatchlist() {
     const items = state.watchlist;
-    const hasExamples = items.some((i) => i.example);
-    const intro = hasExamples
-      ? '<p class="note">These are placeholder examples. Send the bags you want tracked (brand, model, size, colour and your price range) and they will replace this list. The list lives in <code>config/watchlist.json</code>.</p>'
-      : '<p class="note">Each item is searched on every platform at every scan. The list lives in <code>config/watchlist.json</code>.</p>';
+    const intro = `<p class="note">Claude searches Carousell for every search term below, newest listings first, and keeps the ones whose titles match. Titles with "WTB", "class A", "replica" and similar are skipped. The list lives in <a href="${esc(repoUrl('/blob/main/config/watchlist.json'))}" target="_blank" rel="noopener noreferrer"><code>config/watchlist.json</code></a>.</p>`;
     if (!items.length) {
       $('#watchlist').innerHTML = `${intro}<div class="empty"><p><strong>No items yet.</strong></p><p>Add the bags you want tracked to <code>config/watchlist.json</code>.</p></div>`;
       return;
     }
     const cards = items
       .map((item) => {
-        const found = state.data.listings.filter((l) => l.matchedQuery === item.query);
+        const label = item.label || item.query;
+        const found = state.data.listings.filter((l) => (item.id && l.itemId === item.id) || l.matchedQuery === label);
         const live = found.filter((l) => l.status !== 'removed').length;
         const gone = found.length - live;
+        const terms = item.searchTerms || item.keywords || [];
         return `<article class="card">
-          <div class="card-head"><h2 class="card-title">${esc(item.query)}</h2>${item.example ? '<span class="tag">Example</span>' : ''}</div>
+          <div class="card-head"><h2 class="card-title">${esc(label)}</h2>${item.example ? '<span class="tag">Example</span>' : ''}</div>
           <p class="wl-range">${esc(priceRange(item))}</p>
-          ${Array.isArray(item.keywords) && item.keywords.length ? `<div class="keys">${item.keywords.map((k) => `<span class="key">${esc(k)}</span>`).join('')}</div>` : ''}
-          <div class="wl-foot"><span>${live} live${gone ? ` · ${gone} sold or removed` : ''}</span>${found.length ? `<button type="button" class="btn btn-ghost btn-sm" data-show-query="${esc(item.query)}">Show listings</button>` : ''}</div>
+          ${terms.length ? `<div class="keys" aria-label="Search terms">${terms.map((k) => `<span class="key">${esc(k)}</span>`).join('')}</div>` : ''}
+          <div class="wl-foot"><span>${live} live${gone ? ` · ${gone} sold or removed` : ''}</span>${found.length ? `<button type="button" class="btn btn-ghost btn-sm" data-show-query="${esc(label)}">Show listings</button>` : ''}</div>
         </article>`;
       })
       .join('');
@@ -674,21 +730,31 @@
 
   /* ---------- Settings ---------- */
 
+  const SOURCE_STATUS = { ok: 'OK', partial: 'Partly done', blocked: 'Blocked' };
+
   function renderSettings() {
     const s = state.settings;
-    const { lastScan, nextScan, sources } = state.data;
+    const { lastScan, nextScan, sources, notify } = state.data;
     const rawHours = Number(s.scanIntervalHours);
-    const hours = Number.isFinite(rawHours) ? Math.min(4, Math.max(1, Math.round(rawHours))) : 2;
-    const hoursNote = Number.isFinite(rawHours) && rawHours !== hours ? `<p class="hint">The file says ${esc(rawHours)} h. Scans must run every 1 to 4 hours, so ${hours} h is used.</p>` : '';
+    const hours = Number.isFinite(rawHours) ? Math.min(4, Math.max(1, Math.round(rawHours))) : 4;
     const notifyOn = s.notifyOn || {};
-    const email = (s.notifyEmail || '').trim();
-    const groups = s.platforms?.fb_group?.groups || [];
+    const emailOn = Boolean(notify?.configured);
+    const guide = repoUrl('/blob/main/docs/cowork-task.md');
+    const overdue = lastScan && nextScan && Date.now() - time(nextScan) > 30 * 60000;
 
     const sourceRows = Object.entries(PLATFORMS)
-      .map(([key, p]) => {
+      .map(([key]) => {
         const src = sources.find((x) => x.platform === key);
-        const status = !src ? '<span class="v-muted">Not scanned yet</span>' : src.ok === false ? `Failed${src.message ? `: ${esc(src.message)}` : ''}` : `${src.found ?? 0} found`;
-        return `<div class="row"><span class="k">${platformTag(key)}</span><span class="v">${status}</span></div>`;
+        let value;
+        if (!platformEnabled(key)) value = '<span class="v-muted">Not connected yet</span>';
+        else if (!src) value = '<span class="v-muted">Waiting for the first check</span>';
+        else {
+          const label = SOURCE_STATUS[src.status] || 'OK';
+          const detail = src.status === 'blocked' ? '' : ` · ${src.found ?? 0} matched`;
+          value = `<span class="pill pill-src pill-src-${esc(src.status || 'ok')}">${esc(label)}</span> ${src.lastRun ? agoTag(src.lastRun) : ''}${esc(detail)}`;
+        }
+        const note = src?.message && platformEnabled(key) ? `<span class="row-note">${esc(src.message)}</span>` : '';
+        return `<div class="row"><span class="k">${platformTag(key)}</span><span class="v">${value}</span>${note}</div>`;
       })
       .join('');
 
@@ -702,45 +768,44 @@
     $('#settings').innerHTML = `
       <div class="cards">
         <section class="card" aria-labelledby="set-scan">
-          <h2 class="card-title" id="set-scan">Scan schedule</h2>
+          <h2 class="card-title" id="set-scan">Check schedule</h2>
           <p><span class="big">Every ${hours} hour${hours === 1 ? '' : 's'}</span></p>
-          ${hoursNote}
           <dl class="rows">
-            <div class="row"><dt>Last scan</dt><dd>${lastScan ? `${esc(clock(lastScan))} PHT <span class="v-muted">(${agoTag(lastScan)})</span>` : '<span class="v-muted">Not yet</span>'}</dd></div>
-            <div class="row"><dt>Next scan</dt><dd>${nextScan ? `${esc(clock(nextScan))} PHT <span class="v-muted">(${esc(until(nextScan))})</span>` : '<span class="v-muted">Not scheduled</span>'}</dd></div>
+            <div class="row"><dt>Last check</dt><dd>${lastScan ? `${esc(clock(lastScan))} PHT <span class="v-muted">(${agoTag(lastScan)})</span>` : '<span class="v-muted">Not yet</span>'}</dd></div>
+            <div class="row"><dt>Next check</dt><dd>${nextScan ? `${esc(clock(nextScan))} PHT <span class="v-muted">(${overdue ? 'overdue' : esc(until(nextScan))})</span>` : '<span class="v-muted">After the first check</span>'}</dd></div>
           </dl>
-          <p class="hint">Allowed range: every 1 to 4 hours. The page itself checks for new data every 5 minutes.</p>
+          <p class="hint">Checks run through your Claude Cowork task and need your computer on with the Claude app open. ${overdue ? '<strong>The last check is overdue.</strong> ' : ''}<a href="${esc(guide)}" target="_blank" rel="noopener noreferrer">Setup guide</a></p>
         </section>
 
         <section class="card" aria-labelledby="set-sources">
-          <h2 class="card-title" id="set-sources">Last scan by platform</h2>
+          <h2 class="card-title" id="set-sources">Platforms</h2>
           <div class="rows">${sourceRows}</div>
-          <p class="hint">Facebook groups watched: ${groups.length ? groups.length : 'none added yet'}. Philippine listings only.</p>
+          <p class="hint">Carousell only shows listings to real browsers, so Claude searches it in the Claude app's browser. Philippine listings only.</p>
         </section>
 
         <section class="card" aria-labelledby="set-email">
           <h2 class="card-title" id="set-email">Email alerts</h2>
           <dl class="rows">
-            <div class="row"><dt>Send to</dt><dd>${email ? esc(email) : '<span class="v-muted">No Gmail address yet</span>'}</dd></div>
+            <div class="row"><dt>Status</dt><dd>${emailOn ? 'On' : '<span class="v-muted">Not set up yet</span>'}</dd></div>
           </dl>
           <ul class="checks" aria-label="Email me about">${alertTypes}</ul>
-          <p class="hint">One email per scan, only when something changed.</p>
+          <p class="hint">${emailOn ? 'One email per check, only when something changed.' : 'Add the Gmail secrets on GitHub to turn this on (see the README). Until then, the Cowork task can email you through your Gmail connection.'}</p>
         </section>
 
         <section class="card" aria-labelledby="set-preview">
           <h2 class="card-title" id="set-preview">Email preview</h2>
-          ${emailPreview(notifyOn, email)}
+          ${emailPreview(notifyOn)}
         </section>
       </div>
-      <p class="hint">These settings are read from <code>config/settings.json</code>. Editing them from this page comes with the scanner step.</p>`;
+      <p class="hint">Settings live in <a href="${esc(repoUrl('/blob/main/config/settings.json'))}" target="_blank" rel="noopener noreferrer"><code>config/settings.json</code></a>.</p>`;
   }
 
-  function emailPreview(notifyOn, email) {
+  function emailPreview(notifyOn) {
     const { lastScan, events, listings } = state.data;
     const wanted = new Set(Object.entries(NOTIFY_KEYS).filter(([k]) => notifyOn[k]).map(([, type]) => type));
     const byId = new Map(listings.map((l) => [l.id, l]));
     const latest = events.filter((e) => Math.abs(time(e.at) - time(lastScan)) < 60000 && wanted.has(e.type));
-    if (!latest.length) return '<p class="hint">The last scan found nothing new, so no email was sent.</p>';
+    if (!latest.length) return `<p class="hint">${lastScan ? 'The last check found nothing new, so no email was sent.' : 'The first email arrives after the first check finds something.'}</p>`;
 
     const counts = {};
     latest.forEach((e) => (counts[e.type] = (counts[e.type] || 0) + 1));
@@ -752,8 +817,7 @@
 
     const rows = latest
       .map((e) => {
-        const l = byId.get(e.listingId);
-        if (!l) return '';
+        const l = byId.get(e.listingId) || { title: e.title, url: e.url, platform: e.platform };
         const url = safeUrl(l.url);
         const price = e.type === 'price_drop' || e.type === 'price_up' ? `${fmtPrice(e.from)} → ${fmtPrice(e.to)}` : fmtPrice(e.to ?? e.from ?? l.price);
         return `<div class="email-row">
@@ -767,11 +831,75 @@
     return `<div class="email">
       <div class="email-head">
         <span><span class="k">From</span>Bag Tracker</span>
-        <span><span class="k">To</span>${email ? esc(email) : 'your Gmail (not set yet)'}</span>
+        <span><span class="k">To</span>you</span>
         <span class="email-subject"><span class="k">Subject</span>${esc(parts.join(', '))} · Bag Tracker</span>
       </div>
       <div class="email-body">${rows}</div>
     </div>`;
+  }
+
+  /* ---------- Scan now ---------- */
+
+  function openScanSheet() {
+    closeSheet({ restoreFocus: false });
+    $('#scan-sheet').hidden = false;
+    $('#sheet-backdrop').hidden = false;
+    document.body.style.overflow = 'hidden';
+    $('#scan-sheet .icon-btn').focus();
+  }
+
+  function closeScanSheet({ restoreFocus = true } = {}) {
+    if ($('#scan-sheet').hidden) return;
+    $('#scan-sheet').hidden = true;
+    $('#sheet-backdrop').hidden = true;
+    document.body.style.overflow = '';
+    if (restoreFocus) $('#scan-now').focus();
+  }
+
+  // After the user starts the Cowork task, poll for its results for a while.
+  function startWatching() {
+    state.watchUntil = Date.now() + WATCH_FOR_MS;
+    state.watchMark = state.data ? dataMark(state.data) : '';
+    clearInterval(state.watchTimer);
+    state.watchTimer = setInterval(() => {
+      if (Date.now() > state.watchUntil) return stopWatching();
+      load();
+    }, WATCH_EVERY_MS);
+    closeScanSheet({ restoreFocus: false });
+    if (state.data) renderHeader();
+    showToast('Watching for new results for 15 minutes.');
+  }
+
+  function stopWatching() {
+    clearInterval(state.watchTimer);
+    state.watchTimer = null;
+    state.watchUntil = 0;
+    if (state.data) renderHeader();
+  }
+
+  function resultsArrived() {
+    stopWatching();
+    const at = [state.data.lastScan, ...state.data.sources.map((s) => s.lastRun)].filter(Boolean).sort().pop();
+    const fresh = state.data.events.filter((e) => e.at === at);
+    const blocked = state.data.sources.find((s) => s.lastRun === at && s.status === 'blocked');
+    if (blocked) return showToast(`${PLATFORMS[blocked.platform]?.long || 'The site'} blocked the check. See Settings.`);
+    const counts = {};
+    fresh.forEach((e) => (counts[e.type] = (counts[e.type] || 0) + 1));
+    const parts = [];
+    if (counts.new) parts.push(`${counts.new} new`);
+    if (counts.price_drop) parts.push(`${counts.price_drop} price drop${counts.price_drop > 1 ? 's' : ''}`);
+    if (counts.price_up) parts.push(`${counts.price_up} price increase${counts.price_up > 1 ? 's' : ''}`);
+    if (counts.removed) parts.push(`${counts.removed} sold`);
+    showToast(parts.length ? `Updated: ${parts.join(', ')}` : 'Checked just now. Nothing new.');
+  }
+
+  let toastTimer;
+  function showToast(message) {
+    const el = $('#toast');
+    el.textContent = message;
+    el.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => (el.hidden = true), 6000);
   }
 
   /* ---------- Tabs ---------- */
@@ -793,6 +921,7 @@
   function setTab(tab, { scroll = true } = {}) {
     state.tab = TABS.includes(tab) ? tab : 'listings';
     closeSheet({ restoreFocus: false });
+    closeScanSheet({ restoreFocus: false });
     applyTab();
     try {
       const hash = state.tab === 'listings' ? '' : '#' + state.tab;
@@ -852,7 +981,15 @@
 
       if (t.closest('[data-clear-filters]')) return clearFilters();
       if (t.closest('#open-filters')) return openSheet();
-      if (t.closest('[data-close-sheet]') || t.closest('#sheet-backdrop')) return closeSheet();
+      if (t.closest('[data-scan-now]')) return openScanSheet();
+      if (t.closest('#watch-start')) return startWatching();
+      if (t.closest('#open-claude')) {
+        startWatching();
+        return;
+      }
+      if (t.closest('[data-close-scan]')) return closeScanSheet();
+      if (t.closest('#sheet-backdrop')) return $('#scan-sheet').hidden ? closeSheet() : closeScanSheet();
+      if (t.closest('[data-close-sheet]')) return closeSheet();
       if (t.closest('#reload')) return load();
 
       const layoutBtn = t.closest('[data-layout]');
@@ -877,7 +1014,7 @@
 
     $('#filters').addEventListener('change', (e) => {
       const t = e.target;
-      if (t.name === 'platform') state.platforms = setFromChecks('platform', Object.keys(PLATFORMS));
+      if (t.name === 'platform') state.platforms = setFromChecks('platform', activePlatforms().map(([k]) => k));
       else if (t.name === 'status') state.statuses = setFromChecks('status', Object.keys(STATUSES));
       else if (t.id === 'f-query') state.query = t.value;
       else if (t.id === 'f-sort') {
@@ -905,7 +1042,9 @@
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && $('#filters').classList.contains('open')) closeSheet();
+      if (e.key !== 'Escape') return;
+      if (!$('#scan-sheet').hidden) closeScanSheet();
+      else if ($('#filters').classList.contains('open')) closeSheet();
     });
 
     // Broken photo links fall back to the bag placeholder underneath.

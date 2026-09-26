@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <title>Luxury Bag Tracker</title>
-<meta name="description" content="Tracks luxury and vintage bag listings on Facebook Marketplace, Facebook groups and Carousell in the Philippines.">
+<meta name="description" content="Tracks Balenciaga City and Chloe Paddington listings on Carousell Philippines.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
@@ -42,9 +43,9 @@
       <button type="button" class="topnav-link" data-tab="watchlist">Watchlist</button>
       <button type="button" class="topnav-link" data-tab="settings">Settings</button>
     </nav>
-    <p class="scan-status" id="scan-status"><span class="live-dot" id="live-dot" aria-hidden="true"></span><span id="scan-text">Loading listings…</span></p>
-    <button type="button" class="btn btn-ghost reload" id="reload" aria-label="Reload listings">
-      <svg class="icon"><use href="#i-refresh"/></svg><span class="reload-label">Reload</span>
+    <p class="scan-status" id="scan-status"><span class="live-dot" id="live-dot" aria-hidden="true"></span><span id="scan-text">Loading listings…</span><button type="button" class="reload" id="reload" aria-label="Reload listings" title="Reload listings"><svg class="icon"><use href="#i-refresh"/></svg></button></p>
+    <button type="button" class="btn btn-primary scan-now" id="scan-now" data-scan-now>
+      <svg class="icon"><use href="#i-search"/></svg><span>Scan now</span>
     </button>
   </div>
 </header>
@@ -79,6 +80,11 @@
         <p class="result-count" id="result-count" aria-live="polite"></p>
         <div class="list" id="list"></div>
         <div class="table-wrap" id="table-wrap" hidden></div>
+        <div class="empty no-data" id="no-data" hidden>
+          <p><strong>No listings yet.</strong></p>
+          <p>Claude checks Carousell for your 3 bags every 4 hours. Results show up here.</p>
+          <button type="button" class="btn btn-primary" data-scan-now>Scan now</button>
+        </div>
         <div class="empty" id="empty" hidden>
           <p><strong>No listings match these filters.</strong></p>
           <button type="button" class="btn btn-ghost" data-clear-filters>Clear filters</button>
@@ -113,6 +119,27 @@
 </main>
 
 <div class="sheet-backdrop" id="sheet-backdrop" hidden></div>
+
+<div class="sheet scan-sheet" id="scan-sheet" role="dialog" aria-modal="true" aria-labelledby="scan-sheet-title" hidden>
+  <span class="sheet-handle" aria-hidden="true"></span>
+  <div class="sheet-head">
+    <h2 id="scan-sheet-title">Check Carousell now</h2>
+    <button type="button" class="icon-btn" data-close-scan aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button>
+  </div>
+  <p>Carousell only shows listings to real browsers, so checks run through Claude on your computer. It needs to be on with the Claude app open.</p>
+  <ol class="steps">
+    <li>Open the Claude app and go to <strong>Cowork</strong>.</li>
+    <li>Open <strong>Scheduled</strong>, then <strong>Bag Tracker scan</strong>.</li>
+    <li>Tap <strong>Run now</strong>.</li>
+  </ol>
+  <div class="sheet-actions">
+    <a class="btn btn-ghost" id="open-claude" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Open Claude <svg class="icon"><use href="#i-external"/></svg></a>
+    <button type="button" class="btn btn-primary" id="watch-start">I tapped Run now</button>
+  </div>
+  <p class="hint">This page then checks for results every 30 seconds for 15 minutes. A check takes a few minutes. Not set up yet? <a id="setup-link" href="https://github.com/Jeck-bot/Listing-tracker/blob/main/docs/cowork-task.md" target="_blank" rel="noopener noreferrer">Setup guide</a></p>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
 <nav class="tabbar" aria-label="Sections">
   <button type="button" class="tab" data-tab="listings"><svg class="icon"><use href="#i-list"/></svg><span>Listings</span></button>

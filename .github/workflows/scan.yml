@@ -1,0 +1,59 @@
+name: Process scan results
+
+# Claude (the Cowork task) saves what it found on Carousell to scanner/inbox/.
+# That push starts this workflow, which updates data/listings.json, commits it
+# (the dashboard reads that file) and emails any changes.
+on:
+  push:
+    branches: [main]
+    paths: ['scanner/inbox/**']
+  workflow_dispatch:
+
+concurrency:
+  group: scan
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Process inbox
+        id: scan
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          NOTIFY_TO: ${{ secrets.NOTIFY_TO }}
+        run: node scanner/run.js
+
+      - name: Save results
+        env:
+          MESSAGE: ${{ steps.scan.outputs.message }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A data scanner/inbox
+          if [ -d scanner/rejected ]; then git add -A scanner/rejected; fi
+          if git diff --cached --quiet; then
+            echo "Nothing to save."
+            exit 0
+          fi
+          git commit -m "${MESSAGE:-Scan: no changes}"
+          for attempt in 1 2 3; do
+            if git pull --rebase origin main && git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          echo "Could not push the results after 3 tries." >&2
+          exit 1

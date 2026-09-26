@@ -1,11 +1,50 @@
 {
-  "_note": "Placeholder examples. Replace them with the bags you want tracked and remove \"example\": true from real entries.",
+  "_note": "Items are checked in this order and a listing counts for the first item it matches. Matching ignores accents and capital letters and uses whole words. 'all' = every group needs one hit, 'none' = rejects, 'unless' = overrides 'none', 'ignore' = phrases removed before matching.",
+  "excludeAny": ["wtb", "want to buy", "looking for", "lf", "iso", "class a", "replica", "mirror quality", "mirror grade", "mirror copy", "inspired", "oem", "1:1", "dupe"],
   "items": [
-    { "id": "lv-speedy-30", "query": "Louis Vuitton Speedy 30", "keywords": ["speedy 30", "speedy30"], "minPrice": null, "maxPrice": 45000, "example": true },
-    { "id": "chanel-classic-flap-m", "query": "Chanel Classic Flap Medium", "keywords": ["classic flap", "medium flap", "m/l flap"], "minPrice": 300000, "maxPrice": 480000, "example": true },
-    { "id": "hermes-evelyne", "query": "Hermès Evelyne", "keywords": ["evelyne pm", "evelyne tpm"], "minPrice": null, "maxPrice": 160000, "example": true },
-    { "id": "vintage-celine", "query": "Vintage Celine", "keywords": ["celine macadam", "celine horse carriage", "vintage celine"], "minPrice": null, "maxPrice": 25000, "example": true },
-    { "id": "prada-re-edition-2005", "query": "Prada Re-Edition 2005", "keywords": ["re-edition 2005", "re edition 2005"], "minPrice": null, "maxPrice": 50000, "example": true },
-    { "id": "dior-saddle", "query": "Dior Saddle", "keywords": ["saddle bag", "saddle mini", "oblique saddle"], "minPrice": 60000, "maxPrice": 150000, "example": true }
+    {
+      "id": "chloe-paddington-lock",
+      "label": "Chloe Paddington lock and key",
+      "searchTerms": ["chloe paddington lock", "chloe padlock", "chloe lock and key"],
+      "match": {
+        "all": [["chloe"], ["lock", "padlock", "padlocks", "locks"]],
+        "none": ["bag", "bags", "tote", "satchel", "hobo", "shoulder", "purse", "handbag", "sling", "lock not included", "no lock", "without lock", "without the lock", "missing lock"],
+        "unless": ["lock only", "padlock only", "lock and key only", "lock & key only", "key only", "only lock", "only the lock", "no bag", "without bag", "bag not included"],
+        "ignore": ["for bag", "for bags", "for the bag", "for your bag", "for paddington bag", "for paddington bags", "for chloe bag", "for chloe bags", "for paddington"]
+      },
+      "minPrice": null,
+      "maxPrice": null
+    },
+    {
+      "id": "chloe-paddington",
+      "label": "Chloe Paddington bag",
+      "searchTerms": ["chloe paddington"],
+      "match": {
+        "all": [["chloe"], ["paddington"]],
+        "none": ["wallet", "keychain", "charm", "dust bag only", "strap only"]
+      },
+      "minPrice": null,
+      "maxPrice": null
+    },
+    {
+      "id": "balenciaga-city",
+      "label": "Balenciaga City",
+      "searchTerms": ["balenciaga city", "balen city", "bal city"],
+      "match": {
+        "all": [["balenciaga", "balen", "bal"], ["city"]],
+        "none": ["town", "velo", "shoe", "shoes", "sneaker", "sneakers", "shirt", "tee", "hoodie", "cap", "belt", "wallet"],
+        "ignore": [
+          "quezon city", "makati city", "pasig city", "taguig city", "manila city", "mandaluyong city",
+          "marikina city", "pasay city", "paranaque city", "las pinas city", "muntinlupa city", "caloocan city",
+          "valenzuela city", "malabon city", "navotas city", "san juan city", "cebu city", "mandaue city",
+          "lapu-lapu city", "davao city", "iloilo city", "bacolod city", "baguio city", "angeles city",
+          "antipolo city", "cagayan de oro city", "general santos city", "zamboanga city", "tagaytay city",
+          "imus city", "bacoor city", "dasmarinas city", "santa rosa city", "calamba city", "binan city",
+          "city of manila", "alabang city"
+        ]
+      },
+      "minPrice": null,
+      "maxPrice": null
+    }
   ]
 }
