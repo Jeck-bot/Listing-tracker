@@ -1,0 +1,16 @@
+{
+  "scanIntervalHours": 2,
+  "timezone": "Asia/Manila",
+  "notifyEmail": "",
+  "notifyOn": {
+    "newListing": true,
+    "priceDrop": true,
+    "priceIncrease": false,
+    "removed": false
+  },
+  "platforms": {
+    "fb_marketplace": { "enabled": true, "location": "Metro Manila", "radiusKm": 500 },
+    "fb_group": { "enabled": true, "groups": [] },
+    "carousell": { "enabled": true, "country": "PH" }
+  }
+}

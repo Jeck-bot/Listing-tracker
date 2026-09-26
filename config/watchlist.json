@@ -1,0 +1,11 @@
+{
+  "_note": "Placeholder examples. Replace them with the bags you want tracked and remove \"example\": true from real entries.",
+  "items": [
+    { "id": "lv-speedy-30", "query": "Louis Vuitton Speedy 30", "keywords": ["speedy 30", "speedy30"], "minPrice": null, "maxPrice": 45000, "example": true },
+    { "id": "chanel-classic-flap-m", "query": "Chanel Classic Flap Medium", "keywords": ["classic flap", "medium flap", "m/l flap"], "minPrice": 300000, "maxPrice": 480000, "example": true },
+    { "id": "hermes-evelyne", "query": "Hermès Evelyne", "keywords": ["evelyne pm", "evelyne tpm"], "minPrice": null, "maxPrice": 160000, "example": true },
+    { "id": "vintage-celine", "query": "Vintage Celine", "keywords": ["celine macadam", "celine horse carriage", "vintage celine"], "minPrice": null, "maxPrice": 25000, "example": true },
+    { "id": "prada-re-edition-2005", "query": "Prada Re-Edition 2005", "keywords": ["re-edition 2005", "re edition 2005"], "minPrice": null, "maxPrice": 50000, "example": true },
+    { "id": "dior-saddle", "query": "Dior Saddle", "keywords": ["saddle bag", "saddle mini", "oblique saddle"], "minPrice": 60000, "maxPrice": 150000, "example": true }
+  ]
+}
