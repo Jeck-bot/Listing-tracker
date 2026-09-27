@@ -16,6 +16,7 @@ test('Chloe Paddington bags', () => {
   assert.equal(itemFor('Authentic Chloe Paddington satchel with lock and key'), 'chloe-paddington');
   assert.equal(itemFor('chloe paddington (lock not included)'), 'chloe-paddington');
   assert.equal(itemFor('CHLOE-PADDINGTON medium'), 'chloe-paddington');
+  assert.equal(itemFor('Chloe Paddington Satchel Bag Taupe Leather'), 'chloe-paddington');
 });
 
 test('Chloe Paddington lock and key sold on its own', () => {
@@ -24,6 +25,14 @@ test('Chloe Paddington lock and key sold on its own', () => {
   assert.equal(itemFor('Chloe padlock and key for Paddington bag'), 'chloe-paddington-lock');
   assert.equal(itemFor('Chloe Paddington bag lock only'), 'chloe-paddington-lock');
   assert.equal(itemFor('Chloe lock & key, no bag'), 'chloe-paddington-lock');
+  assert.equal(itemFor('Chloe Paddington padlock only'), 'chloe-paddington-lock');
+  assert.equal(itemFor('Chloe lock and key'), 'chloe-paddington-lock');
+  assert.equal(itemFor('Chloe lock and key only'), 'chloe-paddington-lock');
+});
+
+test('Paddington bags that mention a lock but not the word bag are still bags', () => {
+  assert.equal(itemFor('Mini Chloe Paddington dark brown clear lock | y2k 2000s vintage miss sixty hysteric hollister abercrombie dior'), 'chloe-paddington');
+  assert.equal(itemFor('Chloé Paddington “Side Lock” Variant (Phoebe Philo Era) Tan Leather'), 'chloe-paddington');
 });
 
 test('Balenciaga City, including balen / bal shorthand', () => {
@@ -31,6 +40,7 @@ test('Balenciaga City, including balen / bal shorthand', () => {
   assert.equal(itemFor('Balen City Giant 12 gold hardware'), 'balenciaga-city');
   assert.equal(itemFor('Bal City mini'), 'balenciaga-city');
   assert.equal(itemFor('Balenciaga City bag - meetup Makati City'), 'balenciaga-city');
+  assert.equal(itemFor('Balenciaga Graffiti Classic City Bag'), 'balenciaga-city');
 });
 
 test('place names and other models do not count as City', () => {
@@ -38,6 +48,7 @@ test('place names and other models do not count as City', () => {
   assert.equal(itemFor('Balenciaga Town bag'), null);
   assert.equal(itemFor('Balenciaga Triple S sneakers city edition'), null);
   assert.equal(itemFor('Global City bag sale'), null);
+  assert.equal(itemFor("(CITY SNEAKS, WOMEN'S US 8) BAL COGNAC BROWN"), null);
 });
 
 test('buy requests and fakes are skipped', () => {
@@ -46,6 +57,15 @@ test('buy requests and fakes are skipped', () => {
   assert.equal(itemFor('Balenciaga City class A'), null);
   assert.equal(itemFor('Chloe Paddington mirror quality'), null);
   assert.equal(itemFor('Chloe Paddington inspired bag'), null);
+  assert.equal(itemFor('Chloe Paddington INSPO'), null);
+  assert.equal(itemFor('Inspo Design of Balen City Ciaga'), null);
+  assert.equal(itemFor('balenciaga city bag dup3'), null);
+  assert.equal(itemFor('Balen City Bag Doop Large'), null);
+  assert.equal(itemFor('Balenciaga City dupes'), null);
+});
+
+test('sold-out posts are skipped', () => {
+  assert.equal(itemFor('SOLD OUT. Chloe Paddington Bag Collection!'), null);
 });
 
 test('unrelated listings do not match', () => {
