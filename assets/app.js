@@ -756,7 +756,7 @@
     const s = state.settings;
     const { lastScan, nextScan, sources, notify } = state.data;
     const rawHours = Number(s.scanIntervalHours);
-    const hours = Number.isFinite(rawHours) ? Math.min(4, Math.max(1, Math.round(rawHours))) : 4;
+    const hours = Number.isFinite(rawHours) ? Math.min(24, Math.max(1, Math.round(rawHours))) : 4;
     const notifyOn = s.notifyOn || {};
     const emailOn = Boolean(notify?.configured);
     const guide = repoUrl('/blob/main/docs/cowork-task.md');
@@ -789,7 +789,7 @@
       <div class="cards">
         <section class="card" aria-labelledby="set-scan">
           <h2 class="card-title" id="set-scan">Check schedule</h2>
-          <p><span class="big">Every ${hours} hour${hours === 1 ? '' : 's'}</span></p>
+          <p><span class="big">${hours === 24 ? 'Once a day' : `Every ${hours} hour${hours === 1 ? '' : 's'}`}</span></p>
           <dl class="rows">
             <div class="row"><dt>Last check</dt><dd>${lastScan ? `${esc(clock(lastScan))} PHT <span class="v-muted">(${agoTag(lastScan)})</span>` : '<span class="v-muted">Not yet</span>'}</dd></div>
             <div class="row"><dt>Next check</dt><dd>${nextScan ? `${esc(clock(nextScan))} PHT <span class="v-muted">(${overdue ? 'overdue' : esc(until(nextScan))})</span>` : '<span class="v-muted">After the first check</span>'}</dd></div>

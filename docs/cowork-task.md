@@ -2,7 +2,7 @@
 
 Carousell blocks cloud servers with a bot check, so Carousell is searched by
 **Claude in the Claude desktop app's browser**, the same way you'd browse it.
-A Claude Cowork scheduled task does this every 4 hours:
+A Claude Cowork scheduled task does this once a day, at 6 PM:
 
 1. Reads the watchlist from this repo.
 2. Searches Carousell for each search term, newest first.
@@ -11,8 +11,9 @@ A Claude Cowork scheduled task does this every 4 hours:
    dashboard and emails you the changes.
 
 It only works while **your computer is on with the Claude desktop app open**,
-because that's where the browser runs. If the computer is asleep, that run is
-skipped and the dashboard shows the last check as overdue.
+because that's where the browser runs. If the computer is asleep or the app is
+closed at 6 PM, the scan runs once the app is open again; until then the
+dashboard shows the check as overdue.
 
 ## One-time setup
 
@@ -23,12 +24,9 @@ skipped and the dashboard shows the last check as overdue.
 3. Make sure **GitHub** is connected (claude.ai → Settings → Connectors), with
    access to `Jeck-bot/Listing-tracker`.
 4. Create the task, on your phone or computer:
-   - Open **Cowork**, type `/schedule`, and say: *"every 4 hours, run the prompt
-     below"*. Or choose **Set up manually**, name it **Bag Tracker scan**, and
-     paste the prompt.
-   - If only preset schedules are offered, pick **Hourly** and add the extra
-     line from [Hourly schedule](#hourly-schedule) below, so most runs stop
-     right away.
+   - Open **Cowork**, type `/schedule`, and say: *"every day at 6 PM, run the
+     prompt below"*. Or choose **Set up manually**, name it **Bag Tracker scan**,
+     pick **Daily** at 6:00 PM, and paste the prompt.
 5. Tap **Run now** once and stay with it. Approve the browser and GitHub actions
    it asks about, choosing *always allow* where offered, so later runs don't
    stall waiting for you.
@@ -81,18 +79,6 @@ You keep my Bag Tracker dashboard up to date. The project is the public GitHub r
    - If listings.json has "notify": {"configured": false} (GitHub email isn't set up yet), there are likely-new listings, and you can send email through my Gmail connector, also email me that summary with the subject "Bag Tracker: new listings".
 ```
 
-## Hourly schedule
-
-Only needed if Cowork won't let you pick "every 4 hours". Choose **Hourly** and
-add this line at the start of step 1 of the prompt:
-
-```text
-   - If "lastScan" in listings.json is less than 3 hours ago, reply "Not due yet" with the lastScan time and stop.
-```
-
-With this line, a **Run now** within 3 hours of the last check also stops. To
-check sooner, remove the line, run it, then put it back.
-
 ## Troubleshooting
 
 | What you see | What to do |
@@ -100,7 +86,7 @@ check sooner, remove the line, run it, then put it back.
 | Summary says "blocked" | Open Carousell in the same browser yourself and complete any check it shows, then Run now again. If it keeps happening, scan less often. |
 | No **Process scan results** run appears | Claude couldn't save the file. Open the task's last run to see why. Usually the GitHub connector lacks write access; approve it or let it use the browser route in step 4. |
 | Runs are skipped | The computer was asleep or the Claude app was closed. Turn on *Keep computer awake* in the desktop app's settings if you want it to run overnight. |
-| Dashboard says the last check is overdue | Same as above: the task hasn't run in over 4 hours. |
+| Dashboard says the last check is overdue | Same as above: the task hasn't run in over a day. |
 | A listing is missing | Check its title against the rules in `config/watchlist.json`. Titles with "WTB", "class A", "replica" and so on are skipped on purpose. |
 
-Each run uses some of your Claude plan's usage. Every 4 hours keeps it light.
+Each run uses some of your Claude plan's usage. Once a day keeps it light.

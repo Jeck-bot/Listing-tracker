@@ -1,5 +1,5 @@
 {
-  "scanIntervalHours": 4,
+  "scanIntervalHours": 24,
   "timezone": "Asia/Manila",
   "notifyOn": {
     "newListing": true,
