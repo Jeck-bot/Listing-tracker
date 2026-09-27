@@ -1,11 +1,1463 @@
 {
   "sample": false,
-  "lastScan": null,
-  "nextScan": null,
-  "sources": [],
+  "lastScan": "2026-09-27T09:23:08.677Z",
+  "nextScan": "2026-09-27T13:23:08.677Z",
+  "sources": [
+    {
+      "platform": "carousell",
+      "via": "claude-code",
+      "status": "ok",
+      "message": "",
+      "lastRun": "2026-09-27T09:23:08.677Z",
+      "lastOk": "2026-09-27T09:23:08.677Z",
+      "found": 36
+    }
+  ],
   "notify": {
     "configured": false
   },
-  "listings": [],
-  "events": []
+  "listings": [
+    {
+      "id": "carousell-1464085693",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/authentic-chloe-paddington-satchel-bag-white-leather-gold-lock-1464085693/",
+      "title": "Authentic Chloe Paddington Satchel Bag White Leather Gold Lock",
+      "price": 70000,
+      "currency": "PHP",
+      "condition": "Well used",
+      "location": "",
+      "seller": "sereign",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/25/authentic_chloe_paddington_sat_1790351357_a9b90daa_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-25T09:20:01.000Z",
+      "searchTerm": "chloe paddington lock",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 70000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1463723046",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/mini-chloe-paddington-dark-brown-clear-lock-y2k-2000s-vintage-miss-sixty-hysteric-hollister-abercrombie-dior-1463723046/",
+      "title": "Mini Chloe Paddington dark brown clear lock | y2k 2000s vintage miss sixty hysteric hollister abercrombie dior",
+      "price": 50000,
+      "currency": "PHP",
+      "condition": "Like new",
+      "location": "",
+      "seller": "dreaminclub",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/23/mini_chloe_paddington_dark_bro_1790191283_cf52099c_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-23T09:20:01.000Z",
+      "searchTerm": "chloe paddington lock",
+      "itemId": "chloe-paddington-lock",
+      "matchedQuery": "Chloe Paddington lock and key",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 50000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1458799155",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chloe-paddington-brown-satchel-1458799155/",
+      "title": "Chloe Paddington Brown Satchel",
+      "price": 5800,
+      "currency": "PHP",
+      "condition": "Lightly used",
+      "location": "",
+      "seller": "ssbss",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/1/chloe_paddington_brown_satchel_1788234905_f8513e03_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-08-31T09:20:01.000Z",
+      "searchTerm": "chloe paddington lock",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 5800,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1457751607",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chloe-leather-paddington-hand-bag-1457751607/",
+      "title": "Chloe Leather Paddington Hand Bag",
+      "price": 45000,
+      "currency": "PHP",
+      "condition": "Lightly used",
+      "location": "",
+      "seller": "alinauy",
+      "image": "https://media.karousell.com/media/photos/products/2026/8/26/chloe_leather_paddington_hand__1787721278_f770a66d_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-08-28T09:20:01.000Z",
+      "searchTerm": "chloe paddington lock",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 45000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1439373274",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chlo%C3%A9-paddington-%E2%80%9Cside-lock%E2%80%9D-variant-phoebe-philo-era-tan-leather-1439373274/",
+      "title": "Chloé Paddington “Side Lock” Variant (Phoebe Philo Era) Tan Leather",
+      "price": 22500,
+      "currency": "PHP",
+      "condition": "Lightly used",
+      "location": "",
+      "seller": "metro_studio",
+      "image": "https://media.karousell.com/media/photos/products/2026/5/22/rare_vintage_20052007_chlo_pad_1779455958_555c0a7a_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-08-28T09:20:01.000Z",
+      "searchTerm": "chloe paddington lock",
+      "itemId": "chloe-paddington-lock",
+      "matchedQuery": "Chloe Paddington lock and key",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 22500,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1448376301",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chloe-paddington-1448376301/",
+      "title": "Chloe Paddington",
+      "price": 59000,
+      "currency": "PHP",
+      "condition": "Lightly used",
+      "location": "",
+      "seller": "ikarus.auth",
+      "image": "https://media.karousell.com/media/photos/products/2026/7/8/chloe_paddington_1783505717_df876be2_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-07-29T09:20:01.000Z",
+      "searchTerm": "chloe paddington lock",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 59000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1430295904",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chloe-paddington-handbag-1430295904/",
+      "title": "Chloe Paddington Handbag",
+      "price": 10000,
+      "currency": "PHP",
+      "condition": "Well used",
+      "location": "",
+      "seller": "manisanro47672",
+      "image": "https://media.karousell.com/media/photos/products/2026/4/5/chloe_paddington_handbag_1775378653_7125a6f3_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-04-30T09:20:01.000Z",
+      "searchTerm": "chloe paddington lock",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 10000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1464429659",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chloe-paddington-satchel-bag-taupe-leather-1464429659/",
+      "title": "Chloe Paddington Satchel Bag Taupe Leather",
+      "price": 12500,
+      "currency": "PHP",
+      "condition": "Lightly used",
+      "location": "",
+      "seller": "thriftedsoulsy2k",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/27/chloe_paddington_satchel_bag_t_1790496575_09a66c15_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-27T08:20:01.000Z",
+      "searchTerm": "chloe padlock",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 12500,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1463968423",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chloe-paddington-tote-bag-cream-1463968423/",
+      "title": "Chloe Paddington Tote Bag (Cream)",
+      "price": 30000,
+      "currency": "PHP",
+      "condition": "Well used",
+      "location": "",
+      "seller": "loveangelmusicbaby",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/25/chloe_paddington_tote_bag_crea_1790311085_05f5ab88_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-25T09:20:01.000Z",
+      "searchTerm": "chloe padlock",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 30000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1459101028",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chloe-paddington-mini-handbag-gray-leather-1459101028/",
+      "title": "Chloe Paddington Mini Handbag Gray Leather",
+      "price": 70000,
+      "currency": "PHP",
+      "condition": "Lightly used",
+      "location": "",
+      "seller": "daisuki_japan_luxury_by_reiko",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/2/chloe_paddington_mini_handbag__1788314469_476c6d16_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-02T09:20:01.000Z",
+      "searchTerm": "chloe padlock",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 70000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1457868198",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/sold-out-chloe-paddington-bag-collection-1457868198/",
+      "title": "SOLD OUT. Chloe Paddington Bag Collection!",
+      "price": 0,
+      "currency": "PHP",
+      "condition": "Well used",
+      "location": "",
+      "seller": "peachbumapparel",
+      "image": "https://media.karousell.com/media/photos/products/2026/8/26/chloe_paddington_bag_collectio_1787760562_e7eca646_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-08-28T09:20:01.000Z",
+      "searchTerm": "chloe padlock",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 0,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1450752032",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chloe-paddington-satchel-bag-tan-leather-1450752032/",
+      "title": "Chloe Paddington Satchel Bag Tan Leather",
+      "price": 38000,
+      "currency": "PHP",
+      "condition": "Lightly used",
+      "location": "",
+      "seller": "matthewmarkf",
+      "image": "https://media.karousell.com/media/photos/products/2026/7/20/chloe_paddington_satchel_bag_t_1784515496_7e948b00_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-07-29T09:20:01.000Z",
+      "searchTerm": "chloe padlock",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 38000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1444344744",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/authentic-chloe-paddington-satchel-bag-1444344744/",
+      "title": "Authentic Chloe Paddington Satchel bag",
+      "price": 35000,
+      "currency": "PHP",
+      "condition": "Well used",
+      "location": "",
+      "seller": "jäckpötjöy",
+      "image": "https://media.karousell.com/media/photos/products/2026/6/17/chloe_paddington_satchel_bag_1781671927_72e19093_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-06-29T09:20:01.000Z",
+      "searchTerm": "chloe padlock",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 35000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1441260547",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chloe-paddington-handbag-1441260547/",
+      "title": "Chloe Paddington Handbag",
+      "price": 15000,
+      "currency": "PHP",
+      "condition": "Well used",
+      "location": "",
+      "seller": "thethriftdame",
+      "image": "https://media.karousell.com/media/photos/products/2026/6/1/chloe_paddington_handbag_1780305306_9f50b286_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-05-30T09:20:01.000Z",
+      "searchTerm": "chloe padlock",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 15000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1464153384",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chloe-medium-paddington-dark-brown-1464153384/",
+      "title": "Chloe Medium Paddington Dark Brown",
+      "price": 58000,
+      "currency": "PHP",
+      "condition": "Lightly used",
+      "location": "",
+      "seller": "daisuki_japan_luxury_by_reiko",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/26/chloe_medium_paddington_dark_b_1790388595_1e05b756_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-26T09:20:01.000Z",
+      "searchTerm": "chloe paddington",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 58000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1464049521",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chloe-paddington-camel-medium-bag-1464049521/",
+      "title": "Chloe Paddington Camel Medium Bag",
+      "price": 52500,
+      "currency": "PHP",
+      "condition": "Lightly used",
+      "location": "",
+      "seller": "iluvc4ts_",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/25/chloe_paddington_camel_medium__1790338650_d63f2a78_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-25T09:20:01.000Z",
+      "searchTerm": "chloe paddington",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 52500,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1463603505",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chloe-paddington-inspo-1463603505/",
+      "title": "Chloe Paddington INSPO",
+      "price": 850,
+      "currency": "PHP",
+      "condition": "Heavily used",
+      "location": "",
+      "seller": "quickfish.3fde35",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/23/chloe_paddington_1790142600_87e090d1_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-23T09:20:01.000Z",
+      "searchTerm": "chloe paddington",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 850,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1463482804",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chloe-paddington-1463482804/",
+      "title": "Chloe Paddington",
+      "price": 50000,
+      "currency": "PHP",
+      "condition": "Like new",
+      "location": "",
+      "seller": "mlgrz",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/22/chloe_paddington_1790085392_75c5b61b_progressive_thumbnail",
+      "description": "",
+      "postedAt": "2026-09-22T09:20:01.000Z",
+      "searchTerm": "chloe paddington",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 50000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1462393657",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/chlo%C3%A9-paddington-snake-metallic-cream-tan-python-skin-leather-shoulder-bag-with-gold-hardware-1462393657/",
+      "title": "Chloé Paddington Snake Metallic Cream & tan Python Skin Leather Shoulder Bag with gold hardware",
+      "price": 80000,
+      "currency": "PHP",
+      "condition": "Lightly used",
+      "location": "",
+      "seller": "adiorablee",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/21/chlo_paddington_snake_metallic_1790012891_6c2ec449_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-22T09:20:01.000Z",
+      "searchTerm": "chloe paddington",
+      "itemId": "chloe-paddington",
+      "matchedQuery": "Chloe Paddington bag",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 80000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1464427136",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/balenciaga-graffiti-classic-city-bag-1464427136/",
+      "title": "Balenciaga Graffiti Classic City Bag",
+      "price": 60000,
+      "currency": "PHP",
+      "condition": "Like new",
+      "location": "",
+      "seller": "thirdy12493",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/27/balenciaga_graffiti_classic_ci_1790495829_95db9897_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-27T08:20:01.000Z",
+      "searchTerm": "balenciaga city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 60000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1464419641",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/balenciaga-beige-leather-city-bag-1464419641/",
+      "title": "Balenciaga Beige Leather City Bag",
+      "price": 27500,
+      "currency": "PHP",
+      "condition": "Well used",
+      "location": "",
+      "seller": "spiritsea710109",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/27/balenciaga_beige_leather_city__1790493623_98555136_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-27T07:20:01.000Z",
+      "searchTerm": "balenciaga city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 27500,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1460925266",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/balenciaga-le-city-mini-1460925266/",
+      "title": "Balenciaga Le city mini",
+      "price": 800,
+      "currency": "PHP",
+      "condition": "Well used",
+      "location": "",
+      "seller": "khazersobranglegit",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/11/balenciaga_le_city_mini_1789088536_897fa3f2_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-27T01:20:01.000Z",
+      "searchTerm": "balenciaga city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 800,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1464244754",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/balenciaga-city-bag-purple-1464244754/",
+      "title": "Balenciaga City Bag - Purple",
+      "price": 4000,
+      "currency": "PHP",
+      "condition": "Like new",
+      "location": "",
+      "seller": "fukqueazz",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/26/balenciaga_city_bag__purple_1790420485_2b02dd09_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-26T11:20:01.000Z",
+      "searchTerm": "balenciaga city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 4000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1464232564",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/balenciaga-city-bag-mustard-rosegold-giant-12-1464232564/",
+      "title": "Balenciaga city bag mustard rosegold giant 12",
+      "price": 52000,
+      "currency": "PHP",
+      "condition": "Like new",
+      "location": "",
+      "seller": "deniseeee.21",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/26/balenciaga_city_bag_mustard_ro_1790416088_f9567b04_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-26T10:20:01.000Z",
+      "searchTerm": "balenciaga city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 52000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1464199108",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/balenciaga-city-bag-dup3-1464199108/",
+      "title": "balenciaga city bag dup3",
+      "price": 1100,
+      "currency": "PHP",
+      "condition": "Like new",
+      "location": "",
+      "seller": "slushiesoda77",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/26/balenciaga_city_bag_dup3_1790405359_f3a71c6b_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-26T09:20:01.000Z",
+      "searchTerm": "balenciaga city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 1100,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1464190884",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/city-bag-balenciaga-1464190884/",
+      "title": "City bag Balenciaga",
+      "price": 2380,
+      "currency": "PHP",
+      "condition": "Like new",
+      "location": "",
+      "seller": "sth.archvl",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/26/balenciaga_black_leather_city__1790402518_10a2f38a_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-26T09:20:01.000Z",
+      "searchTerm": "balenciaga city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 2380,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1464174094",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/balenciaga-black-leather-motorcycle-city-bag-1464174094/",
+      "title": "Balenciaga Black Leather Motorcycle City Bag",
+      "price": 38000,
+      "currency": "PHP",
+      "condition": "Like new",
+      "location": "",
+      "seller": "sourcevtg_thrft",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/26/balenciaga_medium_city_bag_in__1790396182_a96730fc_progressive_thumbnail",
+      "description": "",
+      "postedAt": "2026-09-26T09:20:01.000Z",
+      "searchTerm": "balenciaga city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 38000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1463966523",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/balen-city-bag-doop-large-1463966523/",
+      "title": "Balen City Bag Doop Large",
+      "price": 1200,
+      "currency": "PHP",
+      "condition": "Brand new",
+      "location": "",
+      "seller": "pixie.lex",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/25/city_bag_doop_large_1790310243_16860a50_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-25T09:20:01.000Z",
+      "searchTerm": "balen city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 1200,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1463397808",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/p2-000-only-24308-balenciaga-motocross-city-clutch-classic-envelope-pouch-coded-lampo-zipper-genuine-leather-1463397808/",
+      "title": "P2,000 only # 24308 - Balenciaga Motocross City Clutch/ Classic Envelope Pouch coded lampo zipper genuine leather",
+      "price": 2000,
+      "currency": "PHP",
+      "condition": "Well used",
+      "location": "",
+      "seller": "jocelynt483",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/22/p1800_only__24308__balenciaga__1790063094_0e082bb2_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-22T09:20:01.000Z",
+      "searchTerm": "balen city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 2000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1462441138",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/inspo-design-of-balen-city-ciaga-1462441138/",
+      "title": "Inspo Design of Balen City Ciaga",
+      "price": 890,
+      "currency": "PHP",
+      "condition": "Like new",
+      "location": "",
+      "seller": "graciahoney",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/18/inspo_design_of_balen_city_cia_1789690686_e78ba8e6_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-18T09:20:01.000Z",
+      "searchTerm": "balen city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 890,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1458683792",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/hearing-offers%E2%9D%97%EF%B8%8Fbalenciaga-graffiti-classic-city-leather-white-studded-printed-blue-red-black-top-handle-kili-baguette-shoulder-vintage-bag-y2k-ahs-pinterest-2000s-mcbling-alt-streetstyle-motorcycle-hourglass-le-cagole-neo-classic-first-part-time-1458683792/",
+      "title": "HEARING OFFERS❗️ balenciaga graffiti classic city leather white|studded printed blue red black top handle kili baguette shoulder vintage bag | y2k ahs pinterest 2000s mcbling alt streetstyle motorcycl",
+      "price": 1234,
+      "currency": "PHP",
+      "condition": "Lightly used",
+      "location": "",
+      "seller": "redumbrella02",
+      "image": "https://media.karousell.com/media/photos/products/2026/8/30/hearing_offersbalenciaga_graff_1788122111_fc8aad04_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-16T09:20:01.000Z",
+      "searchTerm": "balen city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 1234,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1454823561",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/balenciaga-city-bag-in-pink-1454823561/",
+      "title": "Balenciaga City Bag in Pink",
+      "price": 1380,
+      "currency": "PHP",
+      "condition": "Well used",
+      "location": "",
+      "seller": "kyriaki_thrift_shop",
+      "image": "https://media.karousell.com/media/photos/products/2026/8/21/balenciaga_city_bag_in_pink_1787314000_8a662c2f_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-10T09:20:01.000Z",
+      "searchTerm": "balen city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 1380,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1459359478",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/balen-city-1459359478/",
+      "title": "Balen City",
+      "price": 50000,
+      "currency": "PHP",
+      "condition": "Lightly used",
+      "location": "",
+      "seller": "beaucollective",
+      "image": "https://media.karousell.com/media/photos/products/2026/9/3/balen_city_1788422192_0fb584c1_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-09-03T09:20:01.000Z",
+      "searchTerm": "balen city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 50000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1458868449",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/balen-neon-yellow-leather-classic-city-bag-1458868449/",
+      "title": "Balen Neon Yellow Leather Classic City Bag",
+      "price": 2000,
+      "currency": "PHP",
+      "condition": "Well used",
+      "location": "",
+      "seller": "mc397m",
+      "image": "https://media.karousell.com/media/photos/products/2026/8/31/balen_neon_yellow_leather_clas_1788203045_779a5717_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2026-08-31T09:20:01.000Z",
+      "searchTerm": "balen city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 2000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1316948422",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/city-sneaks-women-s-us-8-bal-cognac-brown-1316948422/",
+      "title": "(CITY SNEAKS, WOMEN'S US 8) BAL COGNAC BROWN",
+      "price": 400,
+      "currency": "PHP",
+      "condition": "Brand new",
+      "location": "",
+      "seller": "rocorocodr03471",
+      "image": "https://media.karousell.com/media/photos/products/2024/7/28/city_sneaks_womens_us_8_bal_co_1722172896_c00a9832_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2024-09-27T09:20:01.000Z",
+      "searchTerm": "bal city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 400,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    },
+    {
+      "id": "carousell-1147916795",
+      "platform": "carousell",
+      "source": "Carousell",
+      "url": "https://www.carousell.ph/p/bal-giant-city-shw-1147916795/",
+      "title": "Bal Giant City SHW",
+      "price": 22000,
+      "currency": "PHP",
+      "condition": "Well used",
+      "location": "",
+      "seller": "bend.the.trends.ph",
+      "image": "https://media.karousell.com/media/photos/products/2022/3/9/bal_giant_city_shw_1646801263_af8bfdda_progressive_thumbnail.jpg",
+      "description": "",
+      "postedAt": "2021-09-28T09:20:01.000Z",
+      "searchTerm": "bal city",
+      "itemId": "balenciaga-city",
+      "matchedQuery": "Balenciaga City",
+      "firstSeen": "2026-09-27T09:23:08.677Z",
+      "lastSeen": "2026-09-27T09:23:08.677Z",
+      "status": "new",
+      "previousPrice": null,
+      "priceChangedAt": null,
+      "missing": 0,
+      "priceHistory": [
+        {
+          "price": 22000,
+          "at": "2026-09-27T09:23:08.677Z"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "type": "new",
+      "listingId": "carousell-1464085693",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Authentic Chloe Paddington Satchel Bag White Leather Gold Lock",
+      "url": "https://www.carousell.ph/p/authentic-chloe-paddington-satchel-bag-white-leather-gold-lock-1464085693/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 70000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1463723046",
+      "itemId": "chloe-paddington-lock",
+      "platform": "carousell",
+      "title": "Mini Chloe Paddington dark brown clear lock | y2k 2000s vintage miss sixty hysteric hollister abercrombie dior",
+      "url": "https://www.carousell.ph/p/mini-chloe-paddington-dark-brown-clear-lock-y2k-2000s-vintage-miss-sixty-hysteric-hollister-abercrombie-dior-1463723046/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 50000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1458799155",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloe Paddington Brown Satchel",
+      "url": "https://www.carousell.ph/p/chloe-paddington-brown-satchel-1458799155/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 5800
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1457751607",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloe Leather Paddington Hand Bag",
+      "url": "https://www.carousell.ph/p/chloe-leather-paddington-hand-bag-1457751607/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 45000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1439373274",
+      "itemId": "chloe-paddington-lock",
+      "platform": "carousell",
+      "title": "Chloé Paddington “Side Lock” Variant (Phoebe Philo Era) Tan Leather",
+      "url": "https://www.carousell.ph/p/chlo%C3%A9-paddington-%E2%80%9Cside-lock%E2%80%9D-variant-phoebe-philo-era-tan-leather-1439373274/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 22500
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1448376301",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloe Paddington",
+      "url": "https://www.carousell.ph/p/chloe-paddington-1448376301/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 59000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1430295904",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloe Paddington Handbag",
+      "url": "https://www.carousell.ph/p/chloe-paddington-handbag-1430295904/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 10000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1464429659",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloe Paddington Satchel Bag Taupe Leather",
+      "url": "https://www.carousell.ph/p/chloe-paddington-satchel-bag-taupe-leather-1464429659/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 12500
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1463968423",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloe Paddington Tote Bag (Cream)",
+      "url": "https://www.carousell.ph/p/chloe-paddington-tote-bag-cream-1463968423/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 30000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1459101028",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloe Paddington Mini Handbag Gray Leather",
+      "url": "https://www.carousell.ph/p/chloe-paddington-mini-handbag-gray-leather-1459101028/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 70000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1457868198",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "SOLD OUT. Chloe Paddington Bag Collection!",
+      "url": "https://www.carousell.ph/p/sold-out-chloe-paddington-bag-collection-1457868198/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 0
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1450752032",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloe Paddington Satchel Bag Tan Leather",
+      "url": "https://www.carousell.ph/p/chloe-paddington-satchel-bag-tan-leather-1450752032/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 38000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1444344744",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Authentic Chloe Paddington Satchel bag",
+      "url": "https://www.carousell.ph/p/authentic-chloe-paddington-satchel-bag-1444344744/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 35000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1441260547",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloe Paddington Handbag",
+      "url": "https://www.carousell.ph/p/chloe-paddington-handbag-1441260547/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 15000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1464153384",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloe Medium Paddington Dark Brown",
+      "url": "https://www.carousell.ph/p/chloe-medium-paddington-dark-brown-1464153384/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 58000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1464049521",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloe Paddington Camel Medium Bag",
+      "url": "https://www.carousell.ph/p/chloe-paddington-camel-medium-bag-1464049521/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 52500
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1463603505",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloe Paddington INSPO",
+      "url": "https://www.carousell.ph/p/chloe-paddington-inspo-1463603505/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 850
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1463482804",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloe Paddington",
+      "url": "https://www.carousell.ph/p/chloe-paddington-1463482804/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 50000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1462393657",
+      "itemId": "chloe-paddington",
+      "platform": "carousell",
+      "title": "Chloé Paddington Snake Metallic Cream & tan Python Skin Leather Shoulder Bag with gold hardware",
+      "url": "https://www.carousell.ph/p/chlo%C3%A9-paddington-snake-metallic-cream-tan-python-skin-leather-shoulder-bag-with-gold-hardware-1462393657/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 80000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1464427136",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "Balenciaga Graffiti Classic City Bag",
+      "url": "https://www.carousell.ph/p/balenciaga-graffiti-classic-city-bag-1464427136/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 60000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1464419641",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "Balenciaga Beige Leather City Bag",
+      "url": "https://www.carousell.ph/p/balenciaga-beige-leather-city-bag-1464419641/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 27500
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1460925266",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "Balenciaga Le city mini",
+      "url": "https://www.carousell.ph/p/balenciaga-le-city-mini-1460925266/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 800
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1464244754",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "Balenciaga City Bag - Purple",
+      "url": "https://www.carousell.ph/p/balenciaga-city-bag-purple-1464244754/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 4000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1464232564",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "Balenciaga city bag mustard rosegold giant 12",
+      "url": "https://www.carousell.ph/p/balenciaga-city-bag-mustard-rosegold-giant-12-1464232564/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 52000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1464199108",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "balenciaga city bag dup3",
+      "url": "https://www.carousell.ph/p/balenciaga-city-bag-dup3-1464199108/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 1100
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1464190884",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "City bag Balenciaga",
+      "url": "https://www.carousell.ph/p/city-bag-balenciaga-1464190884/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 2380
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1464174094",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "Balenciaga Black Leather Motorcycle City Bag",
+      "url": "https://www.carousell.ph/p/balenciaga-black-leather-motorcycle-city-bag-1464174094/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 38000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1463966523",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "Balen City Bag Doop Large",
+      "url": "https://www.carousell.ph/p/balen-city-bag-doop-large-1463966523/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 1200
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1463397808",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "P2,000 only # 24308 - Balenciaga Motocross City Clutch/ Classic Envelope Pouch coded lampo zipper genuine leather",
+      "url": "https://www.carousell.ph/p/p2-000-only-24308-balenciaga-motocross-city-clutch-classic-envelope-pouch-coded-lampo-zipper-genuine-leather-1463397808/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 2000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1462441138",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "Inspo Design of Balen City Ciaga",
+      "url": "https://www.carousell.ph/p/inspo-design-of-balen-city-ciaga-1462441138/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 890
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1458683792",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "HEARING OFFERS❗️ balenciaga graffiti classic city leather white|studded printed blue red black top handle kili baguette shoulder vintage bag | y2k ahs pinterest 2000s mcbling alt streetstyle motorcycl",
+      "url": "https://www.carousell.ph/p/hearing-offers%E2%9D%97%EF%B8%8Fbalenciaga-graffiti-classic-city-leather-white-studded-printed-blue-red-black-top-handle-kili-baguette-shoulder-vintage-bag-y2k-ahs-pinterest-2000s-mcbling-alt-streetstyle-motorcycle-hourglass-le-cagole-neo-classic-first-part-time-1458683792/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 1234
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1454823561",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "Balenciaga City Bag in Pink",
+      "url": "https://www.carousell.ph/p/balenciaga-city-bag-in-pink-1454823561/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 1380
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1459359478",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "Balen City",
+      "url": "https://www.carousell.ph/p/balen-city-1459359478/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 50000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1458868449",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "Balen Neon Yellow Leather Classic City Bag",
+      "url": "https://www.carousell.ph/p/balen-neon-yellow-leather-classic-city-bag-1458868449/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 2000
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1316948422",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "(CITY SNEAKS, WOMEN'S US 8) BAL COGNAC BROWN",
+      "url": "https://www.carousell.ph/p/city-sneaks-women-s-us-8-bal-cognac-brown-1316948422/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 400
+    },
+    {
+      "type": "new",
+      "listingId": "carousell-1147916795",
+      "itemId": "balenciaga-city",
+      "platform": "carousell",
+      "title": "Bal Giant City SHW",
+      "url": "https://www.carousell.ph/p/bal-giant-city-shw-1147916795/",
+      "at": "2026-09-27T09:23:08.677Z",
+      "to": 22000
+    }
+  ]
 }
