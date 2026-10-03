@@ -1,6 +1,6 @@
 {
   "_note": "Items are checked in this order and a listing counts for the first item it matches. Matching ignores accents and capital letters and uses whole words. 'all' = every group needs one hit, 'none' = rejects, 'unless' = overrides 'none', 'ignore' = phrases removed before matching.",
-  "excludeAny": ["wtb", "want to buy", "looking for", "lf", "iso", "class a", "replica", "mirror quality", "mirror grade", "mirror copy", "inspired", "oem", "1:1", "dupe"],
+  "excludeAny": ["wtb", "want to buy", "looking for", "lf", "iso", "class a", "replica", "mirror quality", "mirror grade", "mirror copy", "inspired", "inspo", "oem", "1:1", "dupe", "dupes", "doop", "dup3", "sold out"],
   "items": [
     {
       "id": "chloe-paddington-lock",
@@ -8,7 +8,7 @@
       "searchTerms": ["chloe paddington lock", "chloe padlock", "chloe lock and key"],
       "match": {
         "all": [["chloe"], ["lock", "padlock", "padlocks", "locks"]],
-        "none": ["bag", "bags", "tote", "satchel", "hobo", "shoulder", "purse", "handbag", "sling", "lock not included", "no lock", "without lock", "without the lock", "missing lock"],
+        "none": ["bag", "bags", "tote", "satchel", "hobo", "shoulder", "purse", "handbag", "sling", "side lock", "clear lock", "lock not included", "no lock", "without lock", "without the lock", "missing lock"],
         "unless": ["lock only", "padlock only", "lock and key only", "lock & key only", "key only", "only lock", "only the lock", "no bag", "without bag", "bag not included"],
         "ignore": ["for bag", "for bags", "for the bag", "for your bag", "for paddington bag", "for paddington bags", "for chloe bag", "for chloe bags", "for paddington"]
       },
@@ -32,7 +32,7 @@
       "searchTerms": ["balenciaga city", "balen city", "bal city"],
       "match": {
         "all": [["balenciaga", "balen", "bal"], ["city"]],
-        "none": ["town", "velo", "shoe", "shoes", "sneaker", "sneakers", "shirt", "tee", "hoodie", "cap", "belt", "wallet"],
+        "none": ["town", "velo", "shoe", "shoes", "sneaker", "sneakers", "sneaks", "shirt", "tee", "hoodie", "cap", "belt", "wallet"],
         "ignore": [
           "quezon city", "makati city", "pasig city", "taguig city", "manila city", "mandaluyong city",
           "marikina city", "pasay city", "paranaque city", "las pinas city", "muntinlupa city", "caloocan city",
