@@ -15,7 +15,7 @@ turned on; see *Setup*).
 ## How it works
 
 ```
-Claude Cowork task (every 4 h, on your computer's Claude app)
+Claude Cowork task (daily at 6 PM, on your computer's Claude app)
   └─ searches Carousell in the browser for each search term
   └─ saves what it saw → scanner/inbox/cowork-<time>.json
         └─ GitHub Actions "Process scan results" (starts automatically)

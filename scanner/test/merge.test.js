@@ -27,6 +27,13 @@ test('first sighting creates a new listing and a "new" event', () => {
   assert.equal(data.sources[0].found, 1);
 });
 
+test('a daily schedule puts the next check 24 h out; longer intervals are capped at 24 h', () => {
+  const daily = mergeResults(emptyData(), [result([listing(1, 30000)])], { now: t0, watchlist, intervalHours: 24 });
+  assert.equal(daily.data.nextScan, later(24).toISOString());
+  const weekly = mergeResults(emptyData(), [result([listing(1, 30000)])], { now: t0, watchlist, intervalHours: 168 });
+  assert.equal(weekly.data.nextScan, later(24).toISOString());
+});
+
 test('price drop and increase are detected with the old price kept', () => {
   let { data } = run(emptyData(), [result([listing(1, 30000), listing(2, 20000)])], t0);
   const next = run(data, [result([listing(1, 27000), listing(2, 21000)])], later(4));

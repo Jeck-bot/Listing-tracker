@@ -144,7 +144,7 @@ export function mergeResults(prev, results, { now = new Date(), watchlist, inter
     .slice(0, MAX_EVENTS);
 
   const lastScan = checked ? at : base.lastScan;
-  const hours = Math.min(4, Math.max(1, Math.round(Number(intervalHours) || 4)));
+  const hours = Math.min(24, Math.max(1, Math.round(Number(intervalHours) || 4)));
   return {
     data: {
       ...base,
